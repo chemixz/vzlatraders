@@ -1,0 +1,110 @@
+
+
+.white{
+	color: white;
+}
+.navbar{ /*Para quitar el margen por defecto del menu navbar*/
+	margin-bottom: 0;
+}
+
+.sidebar {
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-right: 1px solid #eee;
+  margin-top: 5.1px;
+}
+.container-body{
+	margin-top: 1em;
+}
+
+.floating-bottom {
+
+ bottom:12px;
+  right:2px;
+  position: fixed;
+  _position:absolute;
+  clip:inherit;
+  _top:expression(document.documentElement.scrollTop+document.documentElement.clientHeight-this.clientHeight);
+  _right:expression(document.documentElement.scrollLeft+ document.documentElement.clientWidth - offsetWidth);
+}
+  /*Publications  
+.publication_box {
+  margin-top: 1em;
+  float:left;
+  padding-right: 2em;
+  padding-top: 1em;
+
+}
+.publication_box_content{
+  border: solid 1px black;
+  border-radius: 3px 3px;
+  width: 250px;
+  height: 360px;
+  padding: .7em;
+    
+}
+ */
+
+.center-block() {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.public_box{
+  margin-top: 2em;
+  float:left;
+  margin-right: 2em;
+}
+.public_box_content{
+ 
+  width: 250px;
+  height: 290px;
+}
+.public_box_content_description{
+   padding: .7em;
+    text-indent: 40px;
+}
+.public_box_actions{
+  margin-left: 1em;
+  margin-bottom: 1em;
+}
+/* end publication */
+.no-float{
+  float: none;
+  margin: 0 auto;
+}
+
+/*Comentarios*/
+.comment_box{
+  margin-top: 0.8em;
+}
+.comment_box_text_name{
+  width: 200px;
+}
+
+.comments_list{
+  margin-top: 2em;
+  padding: .7em;
+  height: 20em; 
+  overflow: hidden;
+}
+.comment_list_child{
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+.comment_list_content{
+  padding: .7em;
+   background-color: #f5f5f5;
+   border-radius: 1em 1em 1em 1em;
+}
+.comment_list_description{
+  text-indent: 40px;
+}
+.comment_list_content:nth-child(odd) {
+    background-color:   #F5F5F5;
+}
+
+.comment_list_content:nth-child(even) {
+    background-color:  #F0F8FF
+}

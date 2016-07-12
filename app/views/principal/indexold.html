@@ -1,0 +1,88 @@
+            @if (count($publications)>0)
+	            @foreach ($publications as $P)
+	              <div class="publication_box">
+	              	<div class="publication_box_content center-block">
+                    <div class="text-center">
+                      <p>
+                     <label for="">{{ $P->product_name}}</label> 
+                      </p>
+                    </div>
+                    <div class="text-center">
+                        <img width="100%" height="200" src="{{URL::to('/')}}/uploads/images/publications/{{$P->user->id}}/{{$P->picture}}">
+                    </div>
+                    <label for="">Creado Por:</label>{{$P->user->names}}
+	              		<p>
+                      {{ str_limit($P->description, $limit = 100, $end = '...') }}
+	              		</p>
+	              	</div>
+                  <br>
+                  <div class="text-center">
+                      {{ HTML::link('/publications/show/'.$P->id , 'Ver',['class'=>'btn btn-info'] ) }}
+                      @if (Auth::user()->id == $P->user->id)
+                      {{ HTML::link('/publications/edit/'.$P->id , 'Editar',['class'=>'btn btn-success'] ) }}
+                      @endif
+                  </div>
+	              </div>
+	            @endforeach
+            @else
+               <h3>No hay Publicaciones Registradas</h3>
+            @endif
+
+otro
+
+      <div>
+         @if (count($publications)>0)
+            @foreach ($publications as $P)
+               <div class="panel panel-primary   public_box" > 
+                  <div class="panel-heading "> 
+                      <h4 class="panel-title text-center">{{ $P->product_name}}</h4>
+                  </div> 
+                  <div class="contenido public_box_content" id="">
+                    <div class="text-center">
+                        <img width="100%" height="200" src="{{URL::to('/')}}/uploads/images/publications/{{$P->user->id}}/{{$P->picture}}">
+                    </div>
+                    <div class="public_box_content_description">
+                      <p class="text-justify ">
+                      {{ str_limit($P->description, $limit = 100, $end = '...') }}
+                      </p>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="text-center public_box_actions">
+                {{ HTML::link('/publications/show/'.$P->id , 'Ver',['class'=>'btn btn-info'] ) }}
+                @if (Auth::user()->id == $P->user->id)
+                {{ HTML::link('/publications/edit/'.$P->id , 'Editar',['class'=>'btn btn-success'] ) }}
+                @endif
+               </div>
+               </div> 
+            @endforeach
+         @else
+            <h3>No hay Publicaciones Registradas</h3>
+         @endif
+           
+      </div>
+
+
+              
+     @if (count($publications)>0)
+         @foreach ($publications as $P)
+           <div class="col-sm-6 col-md-3 ">
+             <div class="thumbnail thumbnail_box">
+               <div>
+                   <img width="100%" height="200" src="{{URL::to('/')}}/uploads/images/publications/{{$P->user->id}}/{{$P->picture}}">
+               </div>
+               <div class="">
+                  <h4 class="text-center">{{ $P->product_name}}</h4>
+                  <p class="text-justify ">
+                      {{ str_limit($P->description, $limit = 100, $end = '...') }}
+                  </p>
+               </div>
+               <div>
+                  <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+               </div>
+             </div>
+           </div>
+         @endforeach
+      @else
+         <h3>No hay Publicaciones Registradas</h3>
+      @endif
