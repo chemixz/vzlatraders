@@ -21,12 +21,13 @@
              </div>
             @endif
     	</div>
-      <div class="col-xs-6 col-sm-4 col-md-3 center-block no-float text-center">
-          <div class="form-group">
+      <label for="">La session id {{Session::get('state_id')}}</label>
+      <div class="col-xs-12  ">
+          <div class="form-group center" style=" width: 200px;">
             <form action="{{URL::to('/')}}/state" method="POST" id="state_form">
-            <label style="display: block;">Estado</label>
+            <label style="float:left">Estado</label>
                 <select name="state_id" id="state_select" onchange="this.form.submit()" class="form-control">
-                  @foreach ($states as $S)
+                   @foreach ($states as $S)
                     <option  @if( Session::get('state_id') == $S->id  ) selected @endif value="{{$S->id}}">{{$S->name}}</option>
                   @endforeach
                  
@@ -35,7 +36,8 @@
           </div>
        
       </div>
-      <div>
+
+     <div>
          @if (count($publications)>0)
             @foreach ($publications as $P)
                <div class="panel panel-primary   public_box" > 
@@ -69,9 +71,7 @@
          @endif
            
       </div>
-
    
-
    </div>
 </div>
 @stop

@@ -1,0 +1,19 @@
+         <div class="comments_list ">
+            <div class="comment_list_child">
+                @if (count($comments)>0)
+                  @foreach ($comments as $C)
+                  <div class="thumbnail comment_list_content">
+                      <label for="">{{$C->user->email}}</label><i>({{$C->created_at }})</i> Dijo:
+                      <p class="text-justify comment_list_description">
+                        {{$C->comment}}
+                      </p>
+                   
+                  </div>
+                  @endforeach
+                
+                @else
+                  No hay comentarios
+                @endif
+              
+            </div>
+         </div>

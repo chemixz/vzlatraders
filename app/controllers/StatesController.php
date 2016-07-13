@@ -10,10 +10,17 @@ class StatesController extends \BaseController {
 	public function index()
 	{
 		$states = State::all();
-
+		
 		return View::make('states.index', compact('states'));
 	}
-
+	// public function ajax($id)
+	// {
+	// 	$states = State::find($id);
+	// 	// echo "<pre>";
+	// 	// dd($states->municipalities);
+	// 	// echo "</pre>";
+	// 	return Response::json($states->municipalities);
+	// }
 	/**
 	 * Show the form for creating a new state
 	 *

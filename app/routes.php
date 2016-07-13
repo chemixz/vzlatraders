@@ -8,6 +8,13 @@ Route::post('signup', 'AuthController@store');
 Route::get('profile/edit/{id}', 'AuthController@edit');
 Route::post('profile/update/{id}', 'AuthController@update');
 Route::get('profile/{id}', 'AuthController@show');
+// Route::get('states/ajax/{id}', 'StatesController@ajax');
+Route::get('states/ajax/{id}', function($id)
+{
+	// dd($id);
+  	$states = State::find($id);
+	return Response::json($states->municipalities);
+});
 
 // Validamos los datos de inicio de sesión.
 Route::post('login', 'AuthController@postLogin');

@@ -37,15 +37,15 @@ class AuthController extends BaseController {
             'email' => Input::get('email'),
             'password'=> Input::get('password')
         );
-
- 
+		$search = Input::get('state_id');
+        Session::put('state_id',$search);
+ 		
        	$validator = Validator::make($data = Input::all() , User::$ruleslogin, User::$messageregister);
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
-		$search = Input::get('state_id');
-        Session::put('state_id',$search);
+
         // dd(Session::get('Searcher'));
 		// Validamos los datos y además mandamos como un segundo parámetro la opción de recordar el usuario.
         if(Auth::attempt($userdata, Input::get('remember-me', 0)))
@@ -74,8 +74,7 @@ class AuthController extends BaseController {
 	public function store(){
 		// dd(Input::all());
 
-
-		$validator = Validator::make($data = Input::all() , User::$rules, User::$messageregister);
+		$validator = Validator::make($data = Input::all() , User::$rulesregistro, User::$messageregister);
 		$data['password'] = Hash::make(Input::get('password'));
 		if ($validator->fails())
 		{

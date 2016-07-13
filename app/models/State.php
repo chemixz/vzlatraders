@@ -14,9 +14,9 @@ class State extends \Eloquent {
 	];
 
 
-	public function publications()
+	public function municipalities()
 	{
-	 	return $this->HasMany('Publication');
+	 	return $this->HasMany('Municipality');
 	}
 	public function users()
 	{

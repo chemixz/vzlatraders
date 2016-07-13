@@ -15,7 +15,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @var string
 	 */
 	protected $table = 'users';
-	protected $fillable = ['credential','names','surnames','email','tlf','photo','state_id'];
+	protected $fillable = ['credential','names','surnames','email','tlf','photo','municipality_id'];
 	protected $guarded = ['id'];
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -29,13 +29,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @return mixed
 	 */
 
-	public static $rules = [
+	public static $rulesregistro = [
 	 	'credential'  => 'required|numeric|unique:users,credential',
 	 	'names' => 'required|min:9|max:100',
 	 	'surnames' => 'required|min:9|max:100',
 	 	'email'  => 'required|email|unique:users,email|min:6|max:40',
 	 	'tlf'  => 'required|numeric|min:10',
-	 	'state_id' => 'required',
+	 	'municipality_id' => 'required',
 	 	'password'  => 'required|same:cpassword|min:8|max:25',
 	 	'cpassword'  => 'required|same:password|min:8|max:25',
 	
@@ -51,7 +51,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 	'surnames' => 'required|min:9|max:100',
 	 	'email'  => 'required|email|min:6|max:40',
 	 	'tlf'  => 'required|numeric|min:10',
-	 	'state_id' => 'required',
+	 	'municipality_id' => 'required',
 	 	'photo'  => 'mimes:jpg,jpeg,png',
 
 	 ];
@@ -82,6 +82,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 	'tlf.min' => 'El campo <strong>Telefono </strong> debe contener minimo :min caracteres ', 
 	 	'tlf.required' => 'El campo <strong> Tlf </strong> es requerido',
 	 	'tlf.numeric' => 'El campo <strong>Tlf </strong> debe ser numerico',
+	 	'municipality_id.required' => 'EL campo <strong>Municipio o Parroquia </strong> es requerido',
 	 	'state_id.required' => 'EL campo <strong>Estado </strong> es requerido',
 	 	'photo.mimes' => 'El campo <strong> Foto </strong> debe ser solo jpg o png',
 
@@ -120,9 +121,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 	 	return $this->HasMany('Comment');
 	}
-	public function state()
+	public function municipality()
 	{
-	 	return $this->belongsTo('State');
+	 	return $this->belongsTo('Municipality');
 	}
 
 

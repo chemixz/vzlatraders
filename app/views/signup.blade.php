@@ -1,6 +1,6 @@
 @extends('login_layout')
 @section('content')
-  		<div class="col-xs-5 center-block placeholder no-float" style="margin-top: 3em;"> 
+  		<div class="col-xs-5 center-block placeholder no-float" ng-app="AppSignup" style="margin-top: 3em;"> 
           @if(Session::has('message'))  
           <div class="alert alert-{{ Session::get('class') }} fade in">
               <button aria-hidden="true" data-dismiss="alert" class="close" type="button">x</button>
@@ -38,13 +38,19 @@
               {{ Form::label('tlf','Telefono') }}
               {{ Form::number('tlf',Input::old('tlf') ,['class'=>'form-control', 'placeholder'=>'Ingrese  Telefono'] ) }}
           </div >
-          <div class="form-group">
+          <div class="form-group" ng-controller="getstates">
           {{ Form::label('states','Estado') }}
-            <select name="state_id" class="form-control">
+            <select name="state_id" id="state_select" class="form-control">
               <option selected  value="">Elija un Estado</option>
               @foreach ($states as $S)
                 <option value="{{$S->id}}">{{$S->name}}</option>
               @endforeach
+            </select>
+          </div >
+          <div class="form-group">
+          {{ Form::label('minicipalities','Municipio') }}
+            <select name="municipality_id" id="select_municipalities" class="form-control">
+              <option selected  value="">Elija un municipio</option>
             </select>
           </div >
           <div class="form-group">
@@ -62,9 +68,7 @@
 			      {{ Form::close() }}
            <br>    
   		</div>
-      {{ HTML::script('assets/js/jquery.min.js') }}
-      {{ HTML::script('assets/js/bootstrap.js') }}
-      {{ HTML::script('assets/js/myjs.js') }}
+
     </div>
 @stop
 

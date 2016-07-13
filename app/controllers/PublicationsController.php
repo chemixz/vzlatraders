@@ -8,12 +8,17 @@ class PublicationsController extends \BaseController {
 	 * @return Response
 	 */
 	public function index()
-	{
+	{	
 		
 
+		// dd(count($array[1]['municipios']));
 		$states = State::all();
-		$publications = Publication::where('state_id', '=',Session::get('state_id'))->get();
-		
+		$publications = Publication::all();
+		$sessionid =Session::get('state_id');
+		// $publications = Publication::with(array('municipality' => function($query)use($sessionid)
+		// {
+		// 	$query->where('state_id','=',$sessionid);
+		// }))->get();
 		return View::make('principal.index', compact('publications','states'));
 	}
 	public function setSession(){
@@ -32,7 +37,17 @@ class PublicationsController extends \BaseController {
 	public function create()
 	{
 		$states = State::all();
+		if ( count($states)<1) {
+			Session::flash('message','No hay estados registrados aun');
+			Session::flash('class','warning');
+			return Redirect::to('/');
+		}
 		$categories = Category::all();
+		if ( count($categories)< 1) {
+			Session::flash('message','No hay categorias registradas aun');
+			Session::flash('class','warning');
+			return Redirect::to('/');
+		}
 		// dd($states);
 		return View::make('publications.create',compact('states','categories'));
 	}

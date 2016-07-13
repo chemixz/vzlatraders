@@ -23,8 +23,8 @@ class CreateUsersTable extends Migration {
 	        $table->string('password');
 			$table->enum('level', array(2,1))->default(1);
 	        $table->string('remember_token',100);
-	        $table->integer('state_id')->unsigned();
-			$table->foreign('state_id')->references('id')->on('states')->onDelete('cascade');
+	        $table->integer('municipality_id')->unsigned();
+			$table->foreign('municipality_id')->references('id')->on('municipalities')->onDelete('cascade');
 	        $table->timestamps();
 	    });
 	}

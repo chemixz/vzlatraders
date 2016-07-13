@@ -33,7 +33,7 @@
               </button>
               <div class="collapse navbar-collapse" id="collapse1vz">
               <ul class="nav navbar-nav">
-                <li class=""><a href="{{URL::to('/')}}/profile/{{Auth::user()->id}}"">Perfil </a></li>
+                <li class=""><a href="{{URL::to('/')}}/profile/{{Auth::user()->id}}">Perfil </a></li>
                 <li><a href="#">Link</a></li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -93,11 +93,14 @@
           </p>
       </footer>
    </div>
+
   {{ HTML::script('assets/js/jquery.min.js') }}
+  {{ HTML::script('assets/js/angular.min.js') }}
+  {{ HTML::script('assets/js/signup-angular.js') }}
   {{ HTML::script('assets/js/bootstrap.js') }}
   {{ HTML::script('assets/js/sidebar.js') }}
   {{ HTML::script('assets/js/myjs.js') }}
-  {{ HTML::script('assets/js/jquery.cookie.js') }}
+
   
 </body>
 </html>

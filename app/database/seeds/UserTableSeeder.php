@@ -11,7 +11,7 @@ class UserTableSeeder extends Seeder {
             'surnames'=> 'Briceno Garces',
             'email'  => 'm3taljose@gmail.com',
             'tlf' => '2351310',
-            'state_id' => 1,
+            'municipality_id' => 315,
             'level' => 2,
             'password' => Hash::make('2351310') // Hash::make() nos va generar una cadena con nuestra contraseña encriptada
         ));
@@ -21,7 +21,7 @@ class UserTableSeeder extends Seeder {
             'surnames'=> 'Berrios Ramirez',
             'email'     => 'zerilau@gmail.com',
             'tlf' => '2316114',
-            'state_id' => 1,
+            'municipality_id' => 315,
             'level' => 1,
             'password' => Hash::make('12345678') // Hash::make() nos va generar una cadena con nuestra contraseña encriptada
         ));

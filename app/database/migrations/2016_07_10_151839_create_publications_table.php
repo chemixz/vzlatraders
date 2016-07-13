@@ -25,8 +25,8 @@ class CreatePublicationsTable extends Migration {
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			$table->integer('category_id')->unsigned();
 			$table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-			$table->integer('state_id')->unsigned();
-			$table->foreign('state_id')->references('id')->on('states')->onDelete('cascade');
+			$table->integer('municipality_id')->unsigned();
+			$table->foreign('municipality_id')->references('id')->on('municipalities')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}

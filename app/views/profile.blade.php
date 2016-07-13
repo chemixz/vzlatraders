@@ -4,7 +4,7 @@
 			<div class="col-xs-12 center-block no-float">
 
   			 <div class="text-center thumbnail">
-			 	@if ($user->photo == "default_image.jpg")
+			     	@if ($user->photo == "default_image.jpg")
                		<img width="500" height="500" src="{{URL::to('/')}}/uploads/images/profiles/{{$user->photo}}">
         	 	@else
                		<img width="500" height="500" src="{{URL::to('/')}}/uploads/images/profiles/{{$user->id}}/{{$user->photo}}">
@@ -16,7 +16,7 @@
 	          		<strong>Email: </strong><br>{{$user->email}}
 	           	</p>
 	           	<p>
-	           		<strong>Estado : </strong>{{ $user->state->name }}
+	           		<strong>Estado : </strong>{{ $user->municipality->name }}
 	      		</p>
 	         </div>
         	<div class="text-center">

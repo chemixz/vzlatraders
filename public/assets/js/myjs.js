@@ -2,10 +2,7 @@
 
 $(document).ready(function(){
 
-	// $("#state_select").change(function() {
-	//       $( "#state_form" ).submit();
-	// 	// alert($(this).val());
-	// });
+
 	$('.picture, .photo').on('change', function(event) {
 		var files = event.target.files;
 		var image = files[0]
@@ -26,5 +23,7 @@ $(document).ready(function(){
 	$(function () {
 	  $('[data-toggle="tooltip"]').tooltip()
 	})
+
+
 	
 })

@@ -3,7 +3,7 @@
 class Publication extends \Eloquent {
 
 	protected $table = 'publications';
-	protected $fillable =['product_name','product_brand','description','value','picture','status','user_id','category_id','state_id'];
+	protected $fillable =['product_name','product_brand','description','value','picture','status','user_id','category_id','municipality_id'];
 	protected $guarded = ['id'];
 
 	 public static $rules = [
@@ -13,7 +13,7 @@ class Publication extends \Eloquent {
 	 	'value' => 'required|numeric',
 	 	'picture'  => 'mimes:jpg,jpeg,png',
 	 	'category_id' => 'required',
-	 	'state_id' => 'required',
+	 	'municipality_id' => 'required',
 	 ];
 
 
@@ -21,9 +21,9 @@ class Publication extends \Eloquent {
 	{
 	 	return $this->belongsTo('User');
 	}
-	public function state()
+	public function municipality()
 	{
-	 	return $this->belongsTo('State');
+	 	return $this->belongsTo('Municipality');
 	}
 	public function category()
 	{
