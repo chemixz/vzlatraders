@@ -53,14 +53,24 @@
                 {{ Form::label('value','Precio') }}
 				{{ Form::text('value',$publication->value ,['class'=>'form-control', 'placeholder'=>'Valorado en: '] ) }}	
 			</div>
-			<div class="form-group">
-                {{ Form::label('state','Estado') }}
-				<select name="state_id" class="form-control">
-					@foreach ($states as $S)
-					<option value="{{$S->id}}">{{$S->name}}</option>
-					@endforeach
-				</select>
-			</div >
+			<div class="form-group" ng-controller="getstates">
+            {{ Form::label('states','Estado') }}
+              <select name="state_id" id="state_select" class="form-control">
+                <option selected  value="">Elija un Estado</option>
+                @foreach ($states as $S)
+                 <option  @if( $S->id == $publication->municipality->state->id  ) selected @endif value="{{$S->id}}">{{$S->name}}</option>
+                @endforeach
+              </select>
+            </div >
+            <div class="form-group">
+            {{ Form::label('minicipalities','Municipio') }}
+              <select name="municipality_id" id="select_municipalities" class="form-control">
+                <option selected  value="">Elija un municipio</option>
+                @foreach  ($municipalities as $Mu)
+                 <option  @if( $Mu->id == $publication->municipality->id  ) selected @endif value="{{$Mu->id}}">{{$Mu->name}}</option>
+                @endforeach
+              </select>
+            </div >
 			<div class="form-group">
                 {{ Form::label('category','Categoria') }}
 				<select name="category_id" class="form-control">

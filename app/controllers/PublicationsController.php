@@ -78,7 +78,7 @@ class PublicationsController extends \BaseController {
 
 			$destinationPath = 'uploads/images/publications/'.Auth::user()->id.'/';
 			// File::makeDirectory($destinationPath, $mode = 0777, true, true);
-			$filename = Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
+			$filename = 'profile_'.Auth::user()->id.'_'.Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
 			$mimeType = $file->getMimeType();
 			$extension = $file->getClientOriginalExtension();
 			$upload_success = $file->move($destinationPath,$filename);
@@ -131,10 +131,11 @@ class PublicationsController extends \BaseController {
 		
 		$publication = Publication::find($id);
 		// dd($publication->picture);
+		$municipalities = Municipality::all();
 		$states = State::all();
 		$categories = Category::all();
 
-		return View::make('publications.edit', compact('publication','states','categories'));
+		return View::make('publications.edit', compact('publication','states','categories','municipalities'));
 	}
 	public function verify_user ($value){
 		if (Publication::find($value)->user->id == Auth::user()->id) {
@@ -167,7 +168,8 @@ class PublicationsController extends \BaseController {
 			$file = Input::file('picture');		
 
 			$destinationPath = 'uploads/images/publications/'.Auth::user()->id.'/';
-			$filename = Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
+			$filename = 'profile_'.Auth::user()->id.'_'.Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
+			// $filename = Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
 			$mimeType = $file->getMimeType();
 			$extension = $file->getClientOriginalExtension();
 			$upload_success = $file->move($destinationPath,$filename);

@@ -8,6 +8,10 @@
          </div>
          <h2 class="text-center"> {{$publication->product_name}} </h2>
          <div class="text-justify">
+            <p>
+              <strong>Autor:</strong>
+                {{$publication->user->names}}
+            </p>
           	<p>
           		<strong>Descripcion: </strong><br>
              		{{$publication->description}}
