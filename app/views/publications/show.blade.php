@@ -45,7 +45,7 @@
                     @endif
                   </div>
                    <div class="c_text">
-                      <label class="c_label" for="">{{$C->user->email}}</label><i>({{$C->created_at }})</i> Dijo:
+                      <label class="c_label" for="">{{$C->user->email}}</label><i> ( {{date("d-m-Y H:i:s a", strtotime($C->created_at)); }})</i> Dijo:
                       <p class="c_parraph">{{$C->comment}}</p> <!--Contiene Texto-->
                    </div>
                 </div>

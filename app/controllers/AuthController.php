@@ -73,17 +73,35 @@ class AuthController extends BaseController {
 	}
 	public function store(){
 		// dd(Input::all());
+		$user = new User;
 
 		$validator = Validator::make($data = Input::all() , User::$rulesregistro, User::$messageregister);
-		$data['password'] = Hash::make(Input::get('password'));
+		// $data['password'] = Hash::make(Input::get('password'));
+		// unset($data['cpassword']);
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
-		Session::flash('message','Guardado Correctamente');
-		Session::flash('class','success');
-		User::create($data);
-		return Redirect::to('login');
+			$user->credential=Input::get('credential');
+			$user->names=Input::get('names');
+			$user->surnames=Input::get('surnames');
+			$user->tlf=Input::get('tlf');
+			$user->email=Input::get('email');
+			$user->municipality_id=Input::get('municipality_id');
+			$user->password=Hash::make(Input::get('password'));
+		if($user->save())
+		{
+			Session::flash('message','Guardado Correctamente');
+			Session::flash('class','success');
+			return Redirect::to('login');
+		}
+		else
+		{
+			Session::flash('messager','Ha ocurrido un error');
+			Session::flash('class','danger');
+			return Redirect::to('signup');
+		}
+		
 	
 	}
 	public function update($id){
