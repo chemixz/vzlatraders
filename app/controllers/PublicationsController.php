@@ -16,7 +16,7 @@ class PublicationsController extends \BaseController {
 		$categories = Category::all();
 		// $publications = Publication::all();
 		$sessionid = Session::get('state_id');
-		$municipalities = Municipality::where('state_id','=',Session::get('state_id'))->get();
+		$municipalities = Municipality::where('state_id','=',Session::get('state_id'))->orderBy(DB::raw('RAND()'))->get();
 		
 		return View::make('principal.index', compact('municipalities','states','categories'));
 	}

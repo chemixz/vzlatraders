@@ -4,7 +4,7 @@
 			<div class="col-xs-12 center-block no-float">
         
   			 <div class="text-center thumbnail">
-               <img width="100%" height="500" src="{{URL::to('/')}}/uploads/images/publications/{{$publication->user->id}}/{{$publication->picture}}">
+               <img width="100%" height="500px" src="{{URL::to('/')}}/uploads/images/publications/{{$publication->user->id}}/{{$publication->picture}}">
          </div>
          <h2 class="text-center"> {{$publication->product_name}} </h2>
          <div class="text-justify">
@@ -17,7 +17,7 @@
       					{{$publication->value}}</p>
          </div>
          <hr style="color: black;">
-        	<div class="text-left">
+        	<div class="text-center">
               <a class="btn btn-danger" href="{{URL::to('/')}}/" data-toggle="tooltip" data-placement="top" title="Atras"><span class=" glyphicon glyphicon-arrow-left"></span></a>
         	   @if (Auth::user()->id == $publication->user->id)
               <a class="btn btn-success" href="{{URL::to('/')}}/publications/edit/{{$publication->id}}" data-toggle="tooltip" data-placement="top" title="Editar"><span class="glyphicon glyphicon-edit"></span></a>
