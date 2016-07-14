@@ -24,7 +24,9 @@ Route::group(array('before' => 'auth'), function()
 {
 	// Esta será nuestra ruta de bienvenida.
 	Route::get('/', 'PublicationsController@index');
-	Route::post('state', 'PublicationsController@setSession');
+	Route::post('select_state', 'PublicationsController@set_select_session');
+	Route::post('select_cat', 'PublicationsController@set_select_cat');
+
 	Route::get('publications/new', 'PublicationsController@create');
 	Route::post('publications/store', 'PublicationsController@store');
 	Route::get('publications/show/{id}', 'PublicationsController@show');

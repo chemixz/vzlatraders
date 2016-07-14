@@ -13,21 +13,26 @@ class PublicationsController extends \BaseController {
 
 		// dd(count($array[1]['municipios']));
 		$states = State::all();
-		$publications = Publication::all();
-		$sessionid =Session::get('state_id');
-		// $publications = Publication::with(array('municipality' => function($query)use($sessionid)
-		// {
-		// 	$query->where('state_id','=',$sessionid);
-		// }))->get();
-		return View::make('principal.index', compact('publications','states'));
+		$categories = Category::all();
+		// $publications = Publication::all();
+		$sessionid = Session::get('state_id');
+		$municipalities = Municipality::where('state_id','=',Session::get('state_id'))->get();
+		
+		return View::make('principal.index', compact('municipalities','states','categories'));
 	}
-	public function setSession(){
+	public function set_select_session(){
 		Session::forget('state_id');
-		$search = Input::get('state_id');
-        Session::put('state_id',$search);
+		$session = Input::get('state_id');
+        Session::put('state_id',$session);
         return Redirect::to('/');
-
 	}
+	public function set_select_cat(){
+		Session::forget('category_id');
+		$cat = Input::get('category_id');
+        Session::put('category_id',$cat);
+        return Redirect::to('/');
+	}
+
 
 	/**
 	 * Show the form for creating a new publication
@@ -106,7 +111,7 @@ class PublicationsController extends \BaseController {
 	public function show($id)
 	{
 		$publication = Publication::findOrFail($id);
-		$comments = Comment::where('publication_id', '=',$id )->get();
+		$comments = Comment::where('publication_id', '=',$id )->orderBy('id','DESC')->get();
 		return View::make('publications.show', compact('publication','comments'));
 	}
 

@@ -1,13 +1,13 @@
 @extends('layout')
 @section('content')
 		<div class="row">
-			<div class="col-xs-12 center-block no-float">
+			<div class="col-xs-6 center-block no-float">
 
   			 <div class="text-center thumbnail">
 			     	@if ($user->photo == "default_image.jpg")
-               		<img width="500" height="500" src="{{URL::to('/')}}/uploads/images/profiles/{{$user->photo}}">
+               		<img width="100%" height="500" src="{{URL::to('/')}}/uploads/images/profiles/{{$user->photo}}">
         	 	@else
-               		<img width="500" height="500" src="{{URL::to('/')}}/uploads/images/profiles/{{$user->id}}/{{$user->photo}}">
+               		<img width="100%" height="500" src="{{URL::to('/')}}/uploads/images/profiles/{{$user->id}}/{{$user->photo}}">
         	 	@endif
         	 </div>
         	 <h2 class="text-center"> {{$user->product_name}} </h2>

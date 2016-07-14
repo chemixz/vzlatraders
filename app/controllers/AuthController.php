@@ -124,10 +124,11 @@ class AuthController extends BaseController {
 	}
 	public function edit($id)
 	{	
+		$municipalities = Municipality::all();
 		$states = State::all();
 		$user = User::find($id);
 
-		return View::make('editprofile', compact('user','states'));
+		return View::make('editprofile', compact('user','states','municipalities'));
 	}
 
 	public function show($id)

@@ -82,7 +82,7 @@
          </div>
       </header>
   </div>
-    <div class="container container-body"> <!--contenedor principal -->
+    <div class="container container-body">
     @yield('content')  {{-- LLama al index.blade.php--}}
    </div> 
    <br><br><br>
@@ -95,9 +95,9 @@
    </div>
 
   {{ HTML::script('assets/js/jquery.min.js') }}
+  {{ HTML::script('assets/js/bootstrap.js') }}
   {{ HTML::script('assets/js/angular.min.js') }}
   {{ HTML::script('assets/js/signup-angular.js') }}
-  {{ HTML::script('assets/js/bootstrap.js') }}
   {{ HTML::script('assets/js/sidebar.js') }}
   {{ HTML::script('assets/js/myjs.js') }}
 

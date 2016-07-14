@@ -4,7 +4,7 @@
 			<div class="col-xs-12 center-block no-float">
         
   			 <div class="text-center thumbnail">
-               <img width="500" height="500" src="{{URL::to('/')}}/uploads/images/publications/{{$publication->user->id}}/{{$publication->picture}}">
+               <img width="100%" height="500" src="{{URL::to('/')}}/uploads/images/publications/{{$publication->user->id}}/{{$publication->picture}}">
          </div>
          <h2 class="text-center"> {{$publication->product_name}} </h2>
          <div class="text-justify">
@@ -16,39 +16,43 @@
            		<strong>Valorado en: </strong>
       					{{$publication->value}}</p>
          </div>
-        	<div class="text-center">
+         <hr style="color: black;">
+        	<div class="text-left">
+              <a class="btn btn-danger" href="{{URL::to('/')}}/" data-toggle="tooltip" data-placement="top" title="Atras"><span class=" glyphicon glyphicon-arrow-left"></span></a>
         	   @if (Auth::user()->id == $publication->user->id)
-              {{ HTML::link('/publications/edit/'.$publication->id , 'Editar',['class'=>'btn btn-success'] ) }}
-            @endif
-              {{ HTML::link('/', 'Atras',['class'=>'btn btn-danger'] ) }}
+              <a class="btn btn-success" href="{{URL::to('/')}}/publications/edit/{{$publication->id}}" data-toggle="tooltip" data-placement="top" title="Editar"><span class="glyphicon glyphicon-edit"></span></a>
+             @endif
+              
          </div>
           <br>
-         <hr>
          <div class="text-center">
             <h3 >Comentarios</h3>
          </div>
-         <div class="comments_list ">
-            <div class="comment_list_child">
-                @if (count($comments)>0)
-                  @foreach ($comments as $C)
-                  <div class="thumbnail comment_list_content">
-                      <label for="">{{$C->user->email}}</label><i>({{$C->created_at }})</i> Dijo:
-                      <p class="text-justify comment_list_description">
-                        {{$C->comment}}
-                      </p>
-                   
+        
+          <div class="c_box"> <!--Contiene todo Imagen y Texto-->
+            @if (count($comments)>0)
+              @foreach ($comments as $C)
+               <div class="c_content">
+                  <div class="img"> <!--Contiene Imagen-->
+                    @if ($C->user->photo == "default_image.jpg")
+                      <img style="width:100%; height:100% "  src="{{URL::to('/')}}/uploads/images/profiles/{{$C->user->photo}}" alt="" height="60">
+                    @else
+                      <img style="width:100%; height:100% "  src="{{URL::to('/')}}/uploads/images/profiles/{{$C->user->id}}/{{$C->user->photo}}"  alt="" height="60">
+                    @endif
                   </div>
-                  @endforeach
-                
-                @else
-                  No hay comentarios
-                @endif
-              
-            </div>
-         </div>
+                   <div class="c_text">
+                      <label class="c_label" for="">{{$C->user->email}}</label><i>({{$C->created_at }})</i> Dijo:
+                      <p class="c_parraph">{{$C->comment}}</p> <!--Contiene Texto-->
+                   </div>
+                </div>
+              @endforeach
+              @else
+                No hay comentarios
+              @endif
+           </div>
+         <br>
          <hr>
          <div class="comment_box">
-          <div>
             @if($errors->has())               
                 <div class="alert alert-danger fade in">
                   <button aria-hidden="true" data-dismiss="alert" class="close" type="button">x</button>
@@ -58,7 +62,7 @@
 
                  </div>
             @endif
-          </div>
+          
             {{ Form::open(['url'=>'/comments/store/'.$publication->id,'method'=>'post']) }}
             <div class="comment_box_text_name" >
               <label for="" class="comment_box_label">{{Auth::user()->email}}</label>
@@ -71,7 +75,7 @@
             </div>
            {{ Form::close() }}
          </div>
-         <hr>
+        
       </div>
 		</div>
 @stop
