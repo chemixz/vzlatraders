@@ -36,7 +36,6 @@
 		        </div>
 	     	 </div>
 
-
 			<div class="form-group">
                 {{ Form::label('description','Descripcion') }}
 				{{ Form::textarea('description',Input::old('description') ,['class'=>'form-control', 'placeholder'=>'Ingrese una descripcion'] ) }}	

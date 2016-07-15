@@ -31,6 +31,10 @@ class Publication extends \Eloquent {
 	{
 	 	return $this->HasMany('Comment');
 	}
+	public function proposals()
+	{
+	 	return $this->HasMany('Proposal');
+	}
 
 
 }

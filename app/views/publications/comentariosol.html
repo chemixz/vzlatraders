@@ -1,3 +1,24 @@
+                 <div class="comments_list ">
+            <div class="comment_list_child">
+                @if (count($comments)>0)
+                  @foreach ($comments as $C)
+                  <div class="thumbnail comment_list_content" style="float:left">
+                      <label for="">{{$C->user->email}}</label><i>({{$C->created_at }})  ( {{date("d-m-Y  H:i:s a", strtotime($C->created_at))}} )</i> Dijo:
+                      <p class="text-justify comment_list_description">
+                        {{$C->comment}}
+                      </p>
+                   
+                  </div>
+                  @endforeach
+                
+                @else
+                  No hay comentarios
+                @endif
+              
+            </div>
+         </div>
+
+
          <div class="comments_list ">
             <div class="comment_list_child">
                 @if (count($comments)>0)
@@ -17,3 +38,28 @@
               
             </div>
          </div>
+
+
+
+           <div class="c_box"> <!--El que hiso chuy-->
+            @if (count($comments)>0)
+              @foreach ($comments as $C)
+               <div class="c_content">
+                  <div class="img"> <!--Contiene Imagen-->
+                    @if ($C->user->photo == "default_image.jpg")
+                      <img style="width:100%; height:100% "  src="{{URL::to('/')}}/uploads/images/profiles/{{$C->user->photo}}" alt="" height="60">
+                    @else
+                      <img style="width:100%; height:100% "  src="{{URL::to('/')}}/uploads/images/profiles/{{$C->user->id}}/{{$C->user->photo}}"  alt="" height="60">
+                    @endif
+                  </div>
+                   <div class="c_text">
+                      <label class="c_label" for="">{{$C->user->email}}</label><i> ( {{date("d-m-Y H:i:s a", strtotime($C->created_at)); }})</i> Dijo:
+                      <p class="c_parraph">{{$C->comment}}</p> <!--Contiene Texto-->
+                   </div>
+                </div>
+              @endforeach
+              @else
+                No hay comentarios
+              @endif
+           </div>
+         <br>

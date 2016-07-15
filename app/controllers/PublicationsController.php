@@ -70,7 +70,7 @@ class PublicationsController extends \BaseController {
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
-
+		
 		if (Input::file('picture'))
 		 {
 			$file = Input::file('picture');		

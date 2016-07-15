@@ -38,6 +38,9 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('comments', 'CommentsController@index');
 	Route::post('comments/store/{id}', 'CommentsController@store');
 
+	
+	Route::post('proposals/store/{id}', 'ProposalsController@store');
+
 	// Esta ruta nos servirá para cerrar sesión.
 	Route::get('logout', 'AuthController@logOut');
 
