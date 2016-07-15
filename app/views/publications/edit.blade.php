@@ -4,7 +4,7 @@
 
 		<h2>Editar Publicacion</h2>
 		<br>
-		<div class="col-sm-4 center-block no-float"><!--parte IZQUIERDA-->
+		<div class="col-sm-6 center-block no-float"><!--parte IZQUIERDA-->
 			@if(Session::has('message'))  <!--muestra mesaje de suceso que viene del homecontrol-->
                 <div class="alert alert-{{ Session::get('class') }} fade in">
                     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">x</button>
@@ -36,22 +36,16 @@
 		          </div>
 		        </div>
 	     	 </div>
-            <div class="form-group">  
-                {{ Form::label('product_name','Nombre del producto') }}
-                {{ Form::text('product_name',$publication->product_name ,['class'=>'form-control', 'placeholder'=>'Ingrese el nombre del producto'] ) }}
-            </div>
 
-			<div class="form-group">
-                {{ Form::label('product_brand','Marca del producto') }}
-                {{ Form::text('product_brand',$publication->product_brand ,['class'=>'form-control', 'placeholder'=>'Ingrese la marca del producto'] ) }}
-			</div>
 			<div class="form-group">
                 {{ Form::label('description','Descripcion') }}
 				{{ Form::textarea('description',$publication->description ,['class'=>'form-control', 'placeholder'=>'Ingrese la marca del producto'] ) }}	
 			</div>
 			<div class="form-group">
-                {{ Form::label('value','Precio') }}
-				{{ Form::text('value',$publication->value ,['class'=>'form-control', 'placeholder'=>'Valorado en: '] ) }}	
+                {{ Form::label('changeoptions','Cambio Por:') }}&nbsp; Ejemplo:&nbsp; Crea una lista utilizando /  <br> 
+                <i> producto1 y proucto2 / producto3 / producto 1 producto 2 y producto 3 </i>
+				<textarea name="changeoptions"  cols="30" rows="5" class="form-control">{{$publication->changeoptions}}</textarea>
+					
 			</div>
 			<div class="form-group" ng-controller="getstates">
             {{ Form::label('states','Estado') }}

@@ -21,6 +21,8 @@
              </div>
             @endif
     	</div>
+     
+
        <div class="col-xs-12  ">
         <div class="center-block" style="width: 320px; ">
           <div class="form-group " style=" width: 150px; float:left;">
@@ -49,7 +51,7 @@
           
         </div>
       </div>
-   
+    <?php $colorclass = ['food','medicine','toy','electronic','other'] ?>
     @if ( Session::has('category_id') &&  Session::get('category_id') != "" )
        @include('principal.publication_category')
     @else

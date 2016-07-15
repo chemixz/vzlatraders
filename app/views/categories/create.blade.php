@@ -24,9 +24,12 @@
 		     {{ Form::open(['url'=>'/categories/store','method'=>'post']) }} <!--formulario de usuario registrarse-->
 			<div class="form-group">
                     {{ Form::label('nombre','Nombre') }}
-					{{ Form::text('name',Input::old('name') ,['class'=>'form-control', 'placeholder'=>'Ingrese  Nombre'] ) }}
+					{{ Form::text('name',Input::old('name') ,['class'=>'form-control', 'placeholder'=>'Ingrese nombre de la categoria'] ) }}
 			</div >
-
+			<div class="form-group">
+                    {{ Form::label('codecolor','Color') }}
+					{{ Form::text('codecolor',Input::old('codecolor') ,['class'=>'form-control', 'placeholder'=>'Ingrese  codigo de color'] ) }}
+			</div >
 	        {{ Form::submit('Guardar',['class'=>'btn btn-primary'] )}}
 			{{ HTML::link('/categories' , '<<Atras',['class'=>'btn btn-danger'] ) }}
 			

@@ -1,6 +1,6 @@
 
 body{
-  background-color:   #E6E6FA;
+  background-color: #D3D3D3;
 }
 hr{
  
@@ -33,7 +33,24 @@ hr{
   _top:expression(document.documentElement.scrollTop+document.documentElement.clientHeight-this.clientHeight);
   _right:expression(document.documentElement.scrollLeft+ document.documentElement.clientWidth - offsetWidth);
 }
+
+.panel-custom {
+  background-color: #F8F8FF;
+  border-radius: 9px 9px 0px 0px;
+  /*border-color: #008B8B;*/
+
+}
+.panel-heading-custom
+{
+  /*background-color: #008B8B;*/
+  padding: 10px 15px;
+  color: white;
+  border-radius: 7px 7px 0px 0px;
+}
+
+
   /*Publications  
+}
 .publication_box {
   margin-top: 1em;
   float:left;

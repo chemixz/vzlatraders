@@ -9,7 +9,6 @@ class PublicationsController extends \BaseController {
 	 */
 	public function index()
 	{	
-		
 
 		// dd(count($array[1]['municipios']));
 		$states = State::all();

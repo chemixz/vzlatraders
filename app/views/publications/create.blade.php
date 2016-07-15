@@ -3,7 +3,7 @@
 	<div class="row">
 		<h2>Agregar Publicacion</h2>
 		<br>
-		<div class="col-sm-4 center-block  no-float" ng-app="AppSignup"><!--parte IZQUIERDA-->
+		<div class="col-sm-6 center-block  no-float" ng-app="AppSignup"><!--parte IZQUIERDA-->
 			@if(Session::has('message'))  <!--muestra mesaje de suceso que viene del homecontrol-->
                 <div class="alert alert-{{ Session::get('class') }} fade in">
                     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">x</button>
@@ -36,23 +36,15 @@
 		        </div>
 	     	 </div>
 
-            <div class="form-group">  
-                {{ Form::label('product_name','Nombre del producto') }}
-                {{ Form::text('product_name',Input::old('product_name'),['class'=>'form-control', 'placeholder'=>'Ingrese el nombre del producto'] ) }}
-            	
-            </div>
 
-			<div class="form-group">
-                {{ Form::label('product_brand','Marca del producto') }}
-                {{ Form::text('product_brand',Input::old('product_brand') ,['class'=>'form-control', 'placeholder'=>'Ingrese la marca del producto'] ) }}
-			</div>
 			<div class="form-group">
                 {{ Form::label('description','Descripcion') }}
 				{{ Form::textarea('description',Input::old('description') ,['class'=>'form-control', 'placeholder'=>'Ingrese una descripcion'] ) }}	
 			</div>
 			<div class="form-group">
-                {{ Form::label('value','Valuado en:') }}
-				{{ Form::text('value',Input::old('value') ,['class'=>'form-control', 'placeholder'=>'Valor '] ) }}	
+                {{ Form::label('changeoptions','Cambio Por') }}&nbsp; Ejemplo:&nbsp; Crea una lista utilizando /  <br> 
+                 <i> producto1 y proucto2 / producto3 / producto 1 producto 2 y producto 3 </i>
+				{{ Form::text('changeoptions',Input::old('changeoptions') ,['class'=>'form-control', 'placeholder'=>'Ingrese los productos'] ) }}	
 			</div>
 	          <div class="form-group" ng-controller="getstates">
 	          {{ Form::label('states','Estado') }}

@@ -22,8 +22,12 @@
 		    {{ Form::open(['url'=>'/categories/update/'.$category->id,'method'=>'post']) }} <!--formulario de usuario registrarse-->
         	 <div class="form-group">  
              {{ Form::label('name','Nombre de la categoria') }}
-             {{ Form::text('name',$category->name ,['class'=>'form-control', 'placeholder'=>'Ingrese el nombre del producto'] ) }}
-         </div>
+             {{ Form::text('name',$category->name ,['class'=>'form-control', 'placeholder'=>'Ingrese el nombre de la categoria'] ) }}
+        	 </div>
+        	 <div class="form-group">  
+             {{ Form::label('codecolor','Color') }}
+             {{ Form::text('codecolor',$category->codecolor ,['class'=>'form-control', 'placeholder'=>'Ingrese codigo de color'] ) }}
+        	 </div>
             {{ Form::submit('Guardar',['class'=>'btn btn-primary'] )}}
 				{{ HTML::link('/categories' , 'Atras',['class'=>'btn btn-warning'] ) }}
 			{{ Form::close() }}

@@ -15,10 +15,8 @@ class CreatePublicationsTable extends Migration {
 		Schema::create('publications', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('product_name',100);
-			$table->string('product_brand',100);
 	       	$table->text('description');
-	       	$table->float('value');
+	       	$table->text('changeoptions',200);
 	       	$table->string('picture',200)->default('package.jpg');
 			$table->enum('status', array('Active', 'Inactive','Finished'))->default('Inactive');
 			$table->integer('user_id')->unsigned();
