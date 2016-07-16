@@ -103,9 +103,19 @@ class CommentsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		Comment::destroy($id);
-
-		return Redirect::route('comments.index');
+		$comment = Comment::find($id);
+		
+		if ($comment->user->id == Auth::user()->id ) {
+			Proposal::destroy($id);
+			Session::flash('message_comment','Comentario borrada');
+			Session::flash('class','success');
+		}
+		else
+		{
+			Session::flash('message_comment','No tienes permiso para eso');
+			Session::flash('class','warning');
+		}
+		return Redirect::back();
 	}
 
 }

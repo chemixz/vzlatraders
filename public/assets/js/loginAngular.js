@@ -1,5 +1,6 @@
-angular.module("AppSignup",[])
-	.controller("getstates", function ($scope,$http){
+angular.module("loginAngular",[])
+	  .value('server', 'http://vzlatraders.local')
+		.controller("Login_Controller_GetStates", function ($scope,$http){
 
 		// selectsistemaid = $("#selectsistema option:selected").val();
 		
@@ -12,7 +13,7 @@ angular.module("AppSignup",[])
 				$('#select_municipalities').empty();
 				$http.get('/states/ajax/'+id)
 				.success(function (data){
-					console.log(data)
+					// console.log(data)
 					$.each(data, function(i,e) {
 						
 						var option = new Option(e.name, e.id);
@@ -33,6 +34,3 @@ angular.module("AppSignup",[])
 		});
 
 	})
-
-
-

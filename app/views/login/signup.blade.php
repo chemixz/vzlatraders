@@ -1,6 +1,6 @@
-@extends('login_layout')
+@extends('login.login_layout')
 @section('content')
-  		<div class="col-xs-5 center-block placeholder no-float" ng-app="AppSignup" style="margin-top: 3em;"> 
+  		<div class="col-xs-5 center-block placeholder no-float" ng-app="loginAngular" style="margin-top: 3em;"> 
           @if(Session::has('message'))  
           <div class="alert alert-{{ Session::get('class') }} fade in">
               <button aria-hidden="true" data-dismiss="alert" class="close" type="button">x</button>
@@ -38,7 +38,7 @@
               {{ Form::label('tlf','Telefono') }}
               {{ Form::number('tlf',Input::old('tlf') ,['class'=>'form-control', 'placeholder'=>'Ingrese  Telefono'] ) }}
           </div >
-          <div class="form-group" ng-controller="getstates">
+          <div class="form-group" ng-controller="Login_Controller_GetStates">
           {{ Form::label('states','Estado') }}
             <select name="state_id" id="state_select" class="form-control">
               <option selected  value="">Elija un Estado</option>

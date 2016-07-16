@@ -10,14 +10,19 @@ $(document).ready(function(){
 		
 		reader.onload = function(file) {
 		  var img = new Image();
-		  console.log(file);
+		  // console.log(file);
 		  img.src = file.target.result;
 		  img.setAttribute("class", "img-responsive");
+		  img.setAttribute("width", "100%");
+		  img.setAttribute("height", "500px");
 		  $('#target').html(img);
+		
+		  $('#target_new_proposal').html(img);
+	
 		}
 		
 		reader.readAsDataURL(image);
-		console.log(files);
+		// console.log(files);
 	});
 
 	$(function () {

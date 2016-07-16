@@ -8,7 +8,7 @@
                 </div> 
                 <div class="contenido public_box_content" id="">
                   <div class="text-center">
-                      <img width="100%" height="200" src="{{URL::to('/')}}/uploads/images/publications/{{$P->user->id}}/{{$P->picture}}">
+                      <img width="100%" height="200" src="{{URL::to('/')}}/uploads/images/publications/user_{{$P->user->id}}/{{$P->picture}}">
                   </div>
                   <div class="public_box_content_description">
                     <p class="text-justify ">

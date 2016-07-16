@@ -7,7 +7,7 @@
 			     	@if ($user->photo == "default_image.jpg")
                		<img width="100%" height="500" src="{{URL::to('/')}}/uploads/images/profiles/{{$user->photo}}">
         	 	@else
-               		<img width="100%" height="500" src="{{URL::to('/')}}/uploads/images/profiles/{{$user->id}}/{{$user->photo}}">
+               		<img width="100%" height="500" src="{{URL::to('/')}}/uploads/images/profiles/user_{{$user->id}}/{{$user->photo}}">
         	 	@endif
         	 </div>
         	 <h2 class="text-center"> {{$user->product_name}} </h2>

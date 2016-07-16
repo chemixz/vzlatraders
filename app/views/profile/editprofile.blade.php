@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
      <div class="row">
-        <div class="col-xs-5 center-block no-float" ng-app="AppSignup">
+        <div class="col-xs-5 center-block no-float" ng-app="angularVzla">
                 @if(Session::has('message'))  <!--muestra mesaje de suceso que viene del homecontrol-->
                 <div class="alert alert-{{ Session::get('class') }} fade in">
                     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">x</button>
@@ -27,7 +27,7 @@
                               @if ($user->photo == "default_image.jpg")
                                     <img width="500" height="500" src="{{URL::to('/')}}/uploads/images/profiles/{{$user->photo}}" class="img-responsive">
                               @else
-                                    <img  width="500" height="500" src="{{URL::to('/')}}/uploads/images/profiles/{{$user->id}}/{{$user->photo}}" class="img-responsive">
+                                    <img  width="500" height="500" src="{{URL::to('/')}}/uploads/images/profiles/user_{{$user->id}}/{{$user->photo}}" class="img-responsive">
                               @endif
                             </div>
                             <br>

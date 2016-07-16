@@ -4,7 +4,7 @@
 
 		<h2>Editar Publicacion</h2>
 		<br>
-		<div class="col-sm-6 center-block no-float"><!--parte IZQUIERDA-->
+		<div class="col-sm-6 center-block no-float" ng-app="angularFront"><!--parte IZQUIERDA-->
 			@if(Session::has('message'))  <!--muestra mesaje de suceso que viene del homecontrol-->
                 <div class="alert alert-{{ Session::get('class') }} fade in">
                     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">x</button>
@@ -47,7 +47,7 @@
 				<textarea name="changeoptions"  cols="30" rows="5" class="form-control">{{$publication->changeoptions}}</textarea>
 					
 			</div>
-			<div class="form-group" ng-controller="getstates">
+			<div class="form-group" ng-controller="Publication_Controller_Create_Edit_GetStates">
             {{ Form::label('states','Estado') }}
               <select name="state_id" id="state_select" class="form-control">
                 <option selected  value="">Elija un Estado</option>
@@ -69,7 +69,7 @@
                 {{ Form::label('category','Categoria') }}
 				<select name="category_id" class="form-control">
 					@foreach ($categories as $C)
-						<option value="{{$C->id}}">{{$C->name}}</option>
+						<option  @if( $publication->category->id == $C->id  ) selected @endif value="{{$C->id}}">{{$C->name}}</option>
 					@endforeach
 				</select>
 			</div >

@@ -9,6 +9,14 @@ class Proposal extends \Eloquent {
 
 	 public static $rules = [
 	 	'description'  => 'required',
+	 	'picture'  => 'required|mimes:jpg,jpeg,png',
+	 	'user_id' => 'required',
+	 	'publication_id' => 'required',
+	 ];
+
+
+	 public static $rulesupdate = [
+	 	'description'  => 'required',
 	 	'picture'  => 'mimes:jpg,jpeg,png',
 	 	'user_id' => 'required',
 	 	'publication_id' => 'required',

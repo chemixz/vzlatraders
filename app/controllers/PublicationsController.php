@@ -75,7 +75,7 @@ class PublicationsController extends \BaseController {
 		 {
 			$file = Input::file('picture');		
 
-			$destinationPath = 'uploads/images/publications/'.Auth::user()->id.'/';
+			$destinationPath = 'uploads/images/publications/user_'.Auth::user()->id.'/';
 			// File::makeDirectory($destinationPath, $mode = 0777, true, true);
 			$filename = 'profile_'.Auth::user()->id.'_'.Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
 			$mimeType = $file->getMimeType();
@@ -166,7 +166,7 @@ class PublicationsController extends \BaseController {
 		 {
 			$file = Input::file('picture');		
 
-			$destinationPath = 'uploads/images/publications/'.Auth::user()->id.'/';
+			$destinationPath = 'uploads/images/publications/user_'.Auth::user()->id.'/';
 			$filename = 'profile_'.Auth::user()->id.'_'.Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
 			// $filename = Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
 			$mimeType = $file->getMimeType();

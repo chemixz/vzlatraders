@@ -35,11 +35,15 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('publications/destroy/{id}', 'PublicationsController@destroy');
 	Route::post('publications/update/{id}','PublicationsController@update');
 
-	Route::get('comments', 'CommentsController@index');
+	
 	Route::post('comments/store/{id}', 'CommentsController@store');
-
+	Route::get('comments/destroy/{id}', 'CommentsController@destroy');
+	
 	
 	Route::post('proposals/store/{id}', 'ProposalsController@store');
+	Route::get('proposals/destroy/{id}', 'ProposalsController@destroy');
+	Route::get('proposals/edit/{id}', 'ProposalsController@edit');
+	Route::post('proposals/update/{id}', 'ProposalsController@update');
 
 	// Esta ruta nos servirá para cerrar sesión.
 	Route::get('logout', 'AuthController@logOut');

@@ -97,7 +97,7 @@
   {{ HTML::script('assets/js/jquery.min.js') }}
   {{ HTML::script('assets/js/bootstrap.js') }}
   {{ HTML::script('assets/js/angular.min.js') }}
-  {{ HTML::script('assets/js/signup-angular.js') }}
+  {{ HTML::script('assets/js/angularFront.js') }}
   {{ HTML::script('assets/js/sidebar.js') }}
   {{ HTML::script('assets/js/myjs.js') }}
 

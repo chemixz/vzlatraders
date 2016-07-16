@@ -1,6 +1,6 @@
 
 body{
-  background-color: #D3D3D3;
+  background-color: #F1EDF1;
 }
 hr{
  
@@ -198,12 +198,12 @@ hr{
 .bootstrap_comment_box{
    padding: 2em;
   overflow: auto;
-   height: 300px;
+   height: 400px;
   background-color: #C0C0C0;
 }
 .bootstrap_comment_box_content{
   background-color: gray; padding: 1em;
-   margin-top: 1em;
+  margin-top: 1em;
 }
 .bootstrap_comment_box_content:nth-child(odd) {
     background-color:   #F5F5F5;
@@ -213,7 +213,6 @@ hr{
     background-color:  #F0F8FF;
 }
 .bootstrap_comment_box_parraph{
-
   padding: 0px; 
 }
 .bootstrap_comment_box_parraph p {
@@ -224,8 +223,19 @@ hr{
 }
 
 .bootstrap_proposal_box{
-     padding: 2em;
+    padding: 2em;
     overflow: auto;
-    height: 500px;
+    height: 600px;
     background-color: #C0C0C0;
+}
+.bootstrap_proposal_box_content{
+  background-color: gray; padding: 1em;
+  margin-top: 1em;
+}
+.bootstrap_proposal_box_content:nth-child(odd) {
+    background-color:   #F5F5F5;
+}
+
+.bootstrap_proposal_box_content:nth-child(even) {
+    background-color:  #F0F8FF;
 }

@@ -34,7 +34,9 @@ class ProposalsController extends \BaseController {
 		$data = Input::all();
 		$data['user_id']= Auth::user()->id;
 		$data['publication_id'] = $publication_id;
+		$publication = Publication::find($publication_id);
 		$validator = Validator::make($data , Proposal::$rules);
+
 
 		if ($validator->fails())
 		{
@@ -44,7 +46,7 @@ class ProposalsController extends \BaseController {
 		 {
 			$file = Input::file('picture');		
 
-			$destinationPath = 'uploads/images/publications/'.$publication_id.'/proposals/';
+			$destinationPath = 'uploads/images/publications/user_'.$publication->user->id.'/proposals/';
 			// File::makeDirectory($destinationPath, $mode = 0777, true, true);
 			$filename = 'p_'.$publication_id.'_u_'.Auth::user()->id.'_'.Str::random(20).'.'. $file->getClientOriginalExtension();
 			$mimeType = $file->getMimeType();
@@ -86,9 +88,19 @@ class ProposalsController extends \BaseController {
 	public function edit($id)
 	{
 		$proposal = Proposal::find($id);
-
-		return View::make('proposals.edit', compact('proposal'));
+		$proposal['publication'] = $proposal->publication;
+		// return View::make('proposals.edit', compact('proposal'));
+		return Response::json($proposal);
 	}
+	// public function ajax($id)
+	// {
+	// 	$states = State::find($id);
+	// 	// echo "<pre>";
+	// 	// dd($states->municipalities);
+	// 	// echo "</pre>";
+	// 	return Response::json($states->municipalities);
+	// }
+
 
 	/**
 	 * Update the specified proposal in storage.
@@ -99,17 +111,50 @@ class ProposalsController extends \BaseController {
 	public function update($id)
 	{
 		$proposal = Proposal::findOrFail($id);
-
-		$validator = Validator::make($data = Input::all(), Proposal::$rules);
-
-		if ($validator->fails())
+		if ($proposal->user->id == Auth::user()->id )
 		{
-			return Redirect::back()->withErrors($validator)->withInput();
+			
+			$data = Input::all();
+			$data['user_id']= $proposal->user->id;
+			$data['publication_id'] = $proposal->publication->id;
+			$validator = Validator::make($data , Proposal::$rulesupdate);
+			
+			if ($validator->fails())
+			{
+				return Redirect::back()->withErrors($validator)->withInput();
+			}
+			if (Input::file('picture'))
+			 {
+				$file = Input::file('picture');		
+
+				$destinationPath = 'uploads/images/publications/user_'.$proposal->publication->user->id.'/proposals/';
+				// File::makeDirectory($destinationPath, $mode = 0777, true, true);
+				$filename = 'p_'.$proposal->publication->id.'_u_'.Auth::user()->id.'_'.Str::random(20).'.'. $file->getClientOriginalExtension();
+				$mimeType = $file->getMimeType();
+				$extension = $file->getClientOriginalExtension();
+				$upload_success = $file->move($destinationPath,$filename);
+				File::delete($destinationPath.$proposal->picture);
+				$data['picture'] = $filename;
+								
+			}
+			else
+			{
+				unset($data['picture']);
+			}
+			Session::flash('message_proposal','Propuesta actualizada');
+			Session::flash('class','success');
+			$proposal->update($data);
+			
+		}
+		else
+		{
+			Session::flash('message_proposal','No tienes permiso de hacer eso');
+			Session::flash('class','danger');
+
 		}
 
-		$proposal->update($data);
+		 return Redirect::back();
 
-		return Redirect::route('proposals.index');
 	}
 
 	/**
@@ -120,9 +165,26 @@ class ProposalsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		Proposal::destroy($id);
+		$proposal = Proposal::find($id);
+		
+		if ($proposal->user->id == Auth::user()->id ) {
+			
+				
+				$destinationPath = 'uploads/images/publications/user_'.$proposal->publication->id.'/proposals/';
+				File::delete($destinationPath.$proposal->picture);
+				Proposal::destroy($id);
+				Session::flash('message_proposal','Propuesta borrada');
+				Session::flash('class','success');
+				
+			
+		}
+		else
+		{
+			Session::flash('message_proposal','No tienes permiso para eso');
+			Session::flash('class','warning');
+		}
+		return Redirect::back();
 
-		return Redirect::route('proposals.index');
 	}
 
 }

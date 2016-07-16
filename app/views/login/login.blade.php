@@ -1,4 +1,4 @@
-@extends('login_layout')
+@extends('login.login_layout')
 @section('content')
            <div class="loginmodal-container" style="margin-top: 3em;">
                  <legend>Iniciar sesión</legend>

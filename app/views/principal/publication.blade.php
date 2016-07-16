@@ -9,7 +9,7 @@
                 </div> 
                 <div class="contenido public_box_content" id="">
                   <div class="text-center">
-                      <img width="100%" height="200" src="{{URL::to('/')}}/uploads/images/publications/{{$P->user->id}}/{{$P->picture}}">
+                      <img width="100%" height="200" src="{{URL::to('/')}}/uploads/images/publications/user_{{$P->user->id}}/{{$P->picture}}">
                   </div>
                   <div class="public_box_content_description">
                     
@@ -29,8 +29,8 @@
                     @if (Auth::user()->id == $P->user->id)
                     <a class="btn btn-success" href="{{URL::to('/')}}/publications/edit/{{$P->id}}" data-toggle="tooltip" data-placement="top" title="Editar"><span class="glyphicon glyphicon-edit"></span></a>
                     @endif
-                    <a href="#" class="btn btn-warning "  data-toggle="tooltip" data-placement="top" title="Intercambios"><span class="glyphicon glyphicon-refresh" style="font-size: 15px; "></span> <span class="badge"><span style="color: black;"> 0 </span></span></a>
-                    <span class="btn btn-info " style="float: right; margin-right: 1em;" data-toggle="tooltip" data-placement="top" title="Comentarios"><span class="glyphicon glyphicon-envelope" style="font-size: 15px; "></span> <span class="badge"><span style="color: black;">{{ count($P->comments) }}</span></span></span>
+                    <a href="#" class="btn btn-warning "  data-toggle="tooltip" data-placement="top" title="Intercambios"><span class="glyphicon glyphicon-random" style="font-size: 15px; "></span> <span class="badge"><span style="color: black;"> 0 </span></span></a>
+                    <span class="btn btn-info " style="float: right; margin-right: 1em;" data-toggle="tooltip" data-placement="top" title="Propuestas"><span class="glyphicon glyphicon-comment" style="font-size: 15px; color:black"></span> <span class="badge"><span style="color: black;">{{ count($P->proposals) }}</span></span></span>
                    </p>
                 </div>
                

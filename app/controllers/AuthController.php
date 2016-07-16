@@ -21,7 +21,7 @@ class AuthController extends BaseController {
 		    return Redirect::to('/');
 		}
 		// Mostramos la vista login.blade.php (Recordemos que .blade.php se omite.)
-		return View::make('login', Compact('states'));
+		return View::make('login.login', Compact('states'));
 	}
 
 
@@ -68,7 +68,7 @@ class AuthController extends BaseController {
 		    return Redirect::to('/');
 		}
 		// Mostramos la vista login.blade.php (Recordemos que .blade.php se omite.)
-		return View::make('signup', Compact('states'));
+		return View::make('login.signup', Compact('states'));
 	
 	}
 	public function store(){
@@ -117,7 +117,7 @@ class AuthController extends BaseController {
 		if (Input::file('photo'))
 		 {
 			$file = Input::file('photo');		
-			$destinationPath = 'uploads/images/profiles/'.$user->id.'/';
+			$destinationPath = 'uploads/images/profiles/user_'.$user->id.'/';
 			$filename = Str::random(20).'_'.$user->id .'.'. $file->getClientOriginalExtension();
 			$mimeType = $file->getMimeType();
 			$extension = $file->getClientOriginalExtension();
@@ -146,13 +146,13 @@ class AuthController extends BaseController {
 		$states = State::all();
 		$user = User::find($id);
 
-		return View::make('editprofile', compact('user','states','municipalities'));
+		return View::make('profile.editprofile', compact('user','states','municipalities'));
 	}
 
 	public function show($id)
 	{
 		$user = User::findOrFail($id);
-		return View::make('profile', compact('user'));
+		return View::make('profile.profile', compact('user'));
 	}
 	/**
 	 * Muestra el formulario de login mostrando un mensaje de que cerro sesión.
