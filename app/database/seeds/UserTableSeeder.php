@@ -17,7 +17,7 @@ class UserTableSeeder extends Seeder {
         ));
          User::create(array(
             'credential'  => 19287332,
-            'names'=> 'Laura Isael',
+            'names'=> 'Laura Isabel',
             'surnames'=> 'Berrios Ramirez',
             'email'     => 'zerilau@gmail.com',
             'tlf' => '2316114',

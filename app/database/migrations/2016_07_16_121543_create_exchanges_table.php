@@ -20,8 +20,10 @@ class CreateExchangesTable extends Migration {
 			$table->string('proposal_picture',100);
 			$table->string('proposal_autor_names',100);
 			$table->enum('status', array('progress','canceled','finished'))->default('progress');
-			$table->integer('proposal_id')->unsigned();
+			$table->integer('user_id')->unsigned();
+			$table->foreign('user_id')->references('id')->on('users');
 			$table->integer('publication_id')->unsigned();
+			$table->foreign('publication_id')->references('id')->on('publications');
 			$table->timestamps();
 		});
 	}

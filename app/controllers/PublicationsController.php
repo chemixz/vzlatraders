@@ -111,7 +111,7 @@ class PublicationsController extends \BaseController {
 	public function show($id)
 	{
 		$publication = Publication::findOrFail($id);
-		$exchange = Exchange::where('publication_id', '=',$id )->get();
+		$exchange = Exchange::where('publication_id', '=',$id )->where('user_id','=', $publication->user->id )->get();
 		return View::make('publications.show', compact('publication','exchange'));
 	}
 

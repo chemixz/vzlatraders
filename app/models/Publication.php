@@ -35,6 +35,10 @@ class Publication extends \Eloquent {
 	{
 	 	return $this->HasMany('Proposal');
 	}
+	public function exchange()
+	{
+	 	return $this->HasOne('Exchange');
+	}
 
 
 }

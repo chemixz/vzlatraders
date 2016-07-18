@@ -140,7 +140,7 @@
             @endif
          </div>
          <div ng-controller="Modal_Proposer_Controller">
-         @if ( count( $exchange) < 0)
+         @if ( count( $exchange) < 1)
             @if ($publication->user->id != Auth::user()->id &&  count( Proposal::where('publication_id','=',$publication->id)->where('user_id','=',Auth::user()->id)->get() ) < 1 )
              <div class="text-left" >
                 <a class="btn btn-primary" href="" style="margin-top: 1em;" ng-click="newProposal({{$publication->id}})" data-toggle="modal" data-target="#modalproposal" >Nueva Propuesta </a>
@@ -152,7 +152,8 @@
               @endif
              </div>
             @endif
-        @else
+        @elseif ($publication->user->id != Auth::user()->id )
+
         <div class="text-left">
           <p> Ya esta en progreso el intercambio </p>
         </div>
