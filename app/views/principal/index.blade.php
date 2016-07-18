@@ -51,15 +51,14 @@
           
         </div>
       </div>
-   <!--  <?php $colorclass = ['food','medicine','toy','electronic','other'] ?> -->
+    <div ng-show=" valor=false">
     @if ( Session::has('category_id') &&  Session::get('category_id') != "" )
        @include('principal.publication_category')
     @else
        @include('principal.publication')
     @endif
-      <divc class="col-xs-12">
-      </div>
-    
+    </div>
+
      
   </div>
 </div>

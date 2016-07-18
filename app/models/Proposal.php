@@ -4,7 +4,7 @@ class Proposal extends \Eloquent {
 
 	// Add your validation rules here
 	protected $table = 'proposals';
-	protected $fillable =['description','picture','user_id','publication_id'];
+	protected $fillable =['description','publication_autor_names','picture','user_id','publication_id'];
 	protected $guarded = ['id'];
 
 	 public static $rules = [
@@ -31,4 +31,6 @@ class Proposal extends \Eloquent {
 	{
 	 	return $this->belongsTo('Publication');
 	}
+
+
 }

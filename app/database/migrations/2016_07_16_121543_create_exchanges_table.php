@@ -15,10 +15,16 @@ class CreateExchangesTable extends Migration {
 		Schema::create('exchanges', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->string('publication_picture',100);
+			$table->string('publication_autor_names',100);
+			$table->string('proposal_picture',100);
+			$table->string('proposal_autor_names',100);
+			$table->enum('status', array('progress','canceled','finished'))->default('progress');
+			$table->integer('proposal_id')->unsigned();
+			$table->integer('publication_id')->unsigned();
 			$table->timestamps();
 		});
 	}
-
 
 	/**
 	 * Reverse the migrations.

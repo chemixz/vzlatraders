@@ -42,7 +42,7 @@
              <textarea name="description" id="" cols="" rows="4" class="form-control" placeholder="Ingrese descripcion">{{Input::old('description')}}</textarea>
           	</div> 
 			<div class="form-group">
-                {{ Form::label('changeoptions','Cambio Por') }}&nbsp; Ejemplo:&nbsp; Crea una lista utilizando /  <br> 
+                {{ Form::label('changeoptions','Cambio Por') }}&nbsp;  Crea varias opciones una lista utilizando  Ejemplo:&nbsp;/  <br> 
                  <i> producto1 y proucto2 / producto3 / producto 1 producto 2 y producto 3 </i>
 				{{ Form::text('changeoptions',Input::old('changeoptions') ,['class'=>'form-control', 'placeholder'=>'Ingrese los productos'] ) }}	
 			</div>

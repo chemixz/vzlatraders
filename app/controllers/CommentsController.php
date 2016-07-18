@@ -32,6 +32,7 @@ class CommentsController extends \BaseController {
 	public function store($publication_id)
 	{
 		$data = Input::all();
+
 		$data['user_id']= Auth::user()->id;
 		$data['publication_id'] = $publication_id;
 		$validator = Validator::make($data , Comment::$rules);
@@ -40,10 +41,10 @@ class CommentsController extends \BaseController {
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
-
+		Session::flash('message','Comentario Creado');
+		Session::flash('class','success');
 		Comment::create($data);
-
-		 return Redirect::back();
+		return Redirect::back();
 		// return Redirect::route('comments.index');
 	}
 
@@ -69,8 +70,9 @@ class CommentsController extends \BaseController {
 	public function edit($id)
 	{
 		$comment = Comment::find($id);
-
-		return View::make('comments.edit', compact('comment'));
+		return Response::json($comment);
+		
+		// return View::make('comments.edit', compact('comment'));
 	}
 
 	/**
@@ -82,17 +84,19 @@ class CommentsController extends \BaseController {
 	public function update($id)
 	{
 		$comment = Comment::findOrFail($id);
-
-		$validator = Validator::make($data = Input::all(), Comment::$rules);
+		$data = Input::all();
+		$data['user_id']= $comment->user->id;
+		$data['publication_id'] = $comment->publication->id;
+		$validator = Validator::make($data, Comment::$rules);
 
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
-
+		Session::flash('message','Comentario Actualizado');
+		Session::flash('class','success');
 		$comment->update($data);
-
-		return Redirect::route('comments.index');
+		return Redirect::back();
 	}
 
 	/**
@@ -105,14 +109,14 @@ class CommentsController extends \BaseController {
 	{
 		$comment = Comment::find($id);
 		
-		if ($comment->user->id == Auth::user()->id ) {
-			Proposal::destroy($id);
-			Session::flash('message_comment','Comentario borrada');
+		if ($comment->user->id == Auth::user()->id  || Auth::user()->level == 2 ) {
+			Comment::destroy($id);
+			Session::flash('message','Comentario borrado');
 			Session::flash('class','success');
 		}
 		else
 		{
-			Session::flash('message_comment','No tienes permiso para eso');
+			Session::flash('message','No tienes permiso para eso');
 			Session::flash('class','warning');
 		}
 		return Redirect::back();

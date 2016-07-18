@@ -88,7 +88,7 @@ class ProposalsController extends \BaseController {
 	public function edit($id)
 	{
 		$proposal = Proposal::find($id);
-		$proposal['publication'] = $proposal->publication;
+		// $proposal['publication'] = $proposal->publication;
 		// return View::make('proposals.edit', compact('proposal'));
 		return Response::json($proposal);
 	}
@@ -125,8 +125,7 @@ class ProposalsController extends \BaseController {
 			}
 			if (Input::file('picture'))
 			 {
-				$file = Input::file('picture');		
-
+				$file = Input::file('picture');	
 				$destinationPath = 'uploads/images/publications/user_'.$proposal->publication->user->id.'/proposals/';
 				// File::makeDirectory($destinationPath, $mode = 0777, true, true);
 				$filename = 'p_'.$proposal->publication->id.'_u_'.Auth::user()->id.'_'.Str::random(20).'.'. $file->getClientOriginalExtension();
@@ -141,14 +140,14 @@ class ProposalsController extends \BaseController {
 			{
 				unset($data['picture']);
 			}
-			Session::flash('message_proposal','Propuesta actualizada');
+			Session::flash('message','Propuesta actualizada');
 			Session::flash('class','success');
 			$proposal->update($data);
 			
 		}
 		else
 		{
-			Session::flash('message_proposal','No tienes permiso de hacer eso');
+			Session::flash('message','No tienes permiso de hacer eso');
 			Session::flash('class','danger');
 
 		}
@@ -166,21 +165,20 @@ class ProposalsController extends \BaseController {
 	public function destroy($id)
 	{
 		$proposal = Proposal::find($id);
-		
-		if ($proposal->user->id == Auth::user()->id ) {
-			
+
+		if ($proposal->user->id == Auth::user()->id || $proposal->publication->user->id == Auth::user()->id ) {
 				
-				$destinationPath = 'uploads/images/publications/user_'.$proposal->publication->id.'/proposals/';
+				$destinationPath = 'uploads/images/publications/user_'.$proposal->publication->user->id.'/proposals/';
 				File::delete($destinationPath.$proposal->picture);
 				Proposal::destroy($id);
-				Session::flash('message_proposal','Propuesta borrada');
+				Session::flash('message','Propuesta borrada');
 				Session::flash('class','success');
 				
 			
 		}
 		else
 		{
-			Session::flash('message_proposal','No tienes permiso para eso');
+			Session::flash('message','No tienes permiso para eso');
 			Session::flash('class','warning');
 		}
 		return Redirect::back();

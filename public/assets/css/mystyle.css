@@ -6,6 +6,23 @@ hr{
  
   border-color: gray -moz-use-text-color -moz-use-text-color;
 }
+.animated
+{
+  opacity: 1;
+  max-height: auto;
+  overflow: hidden;
+  -webkit-transition: all 3s ease;
+  -moz-transition: all 3s ease;
+  transition: all 3s ease;
+}
+
+.animated.ng-hide
+{
+  opacity: 0;
+  max-height: 0px !important;
+  overflow: hidden;
+  display: block !important ;
+}
 .white{
 	color: white;
 }
@@ -196,7 +213,7 @@ hr{
 
 /*Comentarios de bootstrap*/
 .bootstrap_comment_box{
-   padding: 2em;
+   padding: 1em;
   overflow: auto;
    height: 400px;
   background-color: #C0C0C0;
@@ -223,7 +240,7 @@ hr{
 }
 
 .bootstrap_proposal_box{
-    padding: 2em;
+    padding: 1em;
     overflow: auto;
     height: 600px;
     background-color: #C0C0C0;

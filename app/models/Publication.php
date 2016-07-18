@@ -29,7 +29,7 @@ class Publication extends \Eloquent {
 	}
 	public function comments()
 	{
-	 	return $this->HasMany('Comment');
+	 	return $this->HasMany('Comment')->orderBy('id','DESC');
 	}
 	public function proposals()
 	{

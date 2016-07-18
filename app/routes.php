@@ -38,12 +38,17 @@ Route::group(array('before' => 'auth'), function()
 	
 	Route::post('comments/store/{id}', 'CommentsController@store');
 	Route::get('comments/destroy/{id}', 'CommentsController@destroy');
-	
+	Route::get('comments/edit/{id}', 'CommentsController@edit');
+	Route::post('comments/update/{id}', 'CommentsController@update');
 	
 	Route::post('proposals/store/{id}', 'ProposalsController@store');
 	Route::get('proposals/destroy/{id}', 'ProposalsController@destroy');
 	Route::get('proposals/edit/{id}', 'ProposalsController@edit');
 	Route::post('proposals/update/{id}', 'ProposalsController@update');
+
+	Route::get('exchanges/new/{id}', 'ExchangesController@newEx');
+	Route::get('exchanges/show/{id}', 'ExchangesController@show');
+
 
 	// Esta ruta nos servirá para cerrar sesión.
 	Route::get('logout', 'AuthController@logOut');

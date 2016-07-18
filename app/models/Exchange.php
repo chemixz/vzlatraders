@@ -2,12 +2,20 @@
 
 class Exchange extends \Eloquent {
 
-	// Add your validation rules here
-	public static $rules = [
-		// 'title' => 'required'
-	];
+	protected $table = 'exchanges';
+	protected $fillable =['publication_picture','publication_autor_names','proposal_picture','proposal_autor_names','proposal_id','publication_id'];
+	protected $guarded = ['id'];
 
-	// Don't forget to fill this array
-	protected $fillable = [];
+	 public static $rules = [
+	 	'publication_picture' => 'required',
+	 	'publication_id' => 'required',
+	 	'publication_autor_names' => 'required',
+	 	'proposal_picture' => 'required',
+	 	'proposal_id' => 'required',
+	 	'proposal_autor_names' => 'required',
+
+	 ];
+
+
 
 }

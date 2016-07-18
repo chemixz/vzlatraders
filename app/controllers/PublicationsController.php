@@ -19,6 +19,7 @@ class PublicationsController extends \BaseController {
 		
 		return View::make('principal.index', compact('municipalities','states','categories'));
 	}
+	
 	public function set_select_session(){
 		Session::forget('state_id');
 		$session = Input::get('state_id');
@@ -77,7 +78,7 @@ class PublicationsController extends \BaseController {
 
 			$destinationPath = 'uploads/images/publications/user_'.Auth::user()->id.'/';
 			// File::makeDirectory($destinationPath, $mode = 0777, true, true);
-			$filename = 'profile_'.Auth::user()->id.'_'.Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
+			$filename = 'pub_'.Auth::user()->id.'_'.Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
 			$mimeType = $file->getMimeType();
 			$extension = $file->getClientOriginalExtension();
 			$upload_success = $file->move($destinationPath,$filename);
@@ -110,8 +111,8 @@ class PublicationsController extends \BaseController {
 	public function show($id)
 	{
 		$publication = Publication::findOrFail($id);
-		$comments = Comment::where('publication_id', '=',$id )->orderBy('id','DESC')->get();
-		return View::make('publications.show', compact('publication','comments'));
+		$exchange = Exchange::where('publication_id', '=',$id )->get();
+		return View::make('publications.show', compact('publication','exchange'));
 	}
 
 	/**
@@ -167,7 +168,7 @@ class PublicationsController extends \BaseController {
 			$file = Input::file('picture');		
 
 			$destinationPath = 'uploads/images/publications/user_'.Auth::user()->id.'/';
-			$filename = 'profile_'.Auth::user()->id.'_'.Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
+			$filename = 'pub_'.Auth::user()->id.'_'.Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
 			// $filename = Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
 			$mimeType = $file->getMimeType();
 			$extension = $file->getClientOriginalExtension();
