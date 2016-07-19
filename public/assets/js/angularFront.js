@@ -2,8 +2,7 @@ angular.module("angularFront",[])
 	  .value('server', 'http://vzlatraders.local')
 
 //  Calling Form  Publication edit and create  
-		.controller("Publication_Controller_Create_Edit_GetStates", function ($scope,$http){
-
+	.controller("Publication_Controller_Create_Edit_GetStates", function ($scope,$http){
 
 		
 		$("#state_select").change(function(event) {

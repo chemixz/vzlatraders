@@ -43,6 +43,7 @@ return array(
 
 	'port' => 587,
 
+
 	/*
 	|--------------------------------------------------------------------------
 	| Global "From" Address
@@ -54,7 +55,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'm3taljose@gmail.com', 'name' => 'Sistema Financiero Familiar'),
+	'from' => array('address' => 'm3taljose@gmail.com', 'name' => 'Venezuela Traders Ven' ),
 
 	/*
 	|--------------------------------------------------------------------------

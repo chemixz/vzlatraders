@@ -9,9 +9,9 @@
     </head>
     <body>
     	<div class="container">
-    		
-    	</div>
-    	  @yield('content')
+    	    @yield('content')
+            
+        </div>
 
         {{ HTML::script('assets/js/angular.min.js') }}
         {{ HTML::script('assets/js/jquery.min.js') }}

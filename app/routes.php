@@ -5,6 +5,7 @@
 Route::get('login', 'AuthController@showLogin');
 Route::get('signup', 'AuthController@showsignup');
 Route::post('signup', 'AuthController@store');
+Route::get('confirm/account/{confirmationcode}' ,'AuthController@confirm');
 Route::get('profile/edit/{id}', 'AuthController@edit');
 Route::post('profile/update/{id}', 'AuthController@update');
 Route::get('profile/{id}', 'AuthController@show');

@@ -102,15 +102,15 @@ class ExchangesController extends \BaseController {
 			// echo "<pre>";
 			// dd($newPathWithName1);
 			// echo "</pre>";
-			File::copy($image1,$newPathWithName1);
-			File::copy($image2,$newPathWithName2);
+			// File::copy($image1,$newPathWithName1);
+			// File::copy($image2,$newPathWithName2);
 			
-			Exchange::create($data[0]);
-			Exchange::create($data[1]);
+			// Exchange::create($data[0]);
+			// Exchange::create($data[1]);
 
 			$user = User::find($proposal->user->id );
 				$data = [
-					'msj' => 'Vzlatraders le informa que una tus propuesta has sido aceptada',
+					'msj' => 'Vzlatraders le informa que una de tus propuestas han sido aceptada',
 					'names' => $proposal->user->names,
 					'publication' => $proposal->publication->description,
 					'proposal' => $proposal->description,
@@ -118,7 +118,7 @@ class ExchangesController extends \BaseController {
 				 ];
 
 
-				Mail::send('emails.acept', $data, function($message) use ($user)
+				Mail::send('emails.accept', $data, function($message) use ($user)
 				{
 			  	   	$message->from('vzlatrader@vzla.com');
 			   		$message->to($user->email, $user->names)->subject('Vzlatrader Propuesta aceptada');

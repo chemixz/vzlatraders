@@ -45,7 +45,21 @@ class AuthController extends BaseController {
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
-
+		$user = User::where('email','=', $userdata['email'])->first();
+		
+		if ($user ) {
+			if ($user->confirmed < 1) {
+				Session::flash('message','Email no confirmado.');
+				Session::flash('class','danger');
+	        	return Redirect::to('login')->withInput();
+			}
+		}
+		else
+		{
+			Session::flash('message','Email no registrado.');
+			Session::flash('class','danger');
+	        return Redirect::to('login')->withInput();
+		}
         // dd(Session::get('Searcher'));
 		// Validamos los datos y además mandamos como un segundo parámetro la opción de recordar el usuario.
         if(Auth::attempt($userdata, Input::get('remember-me', 0)))
@@ -56,8 +70,7 @@ class AuthController extends BaseController {
         // En caso de que la autenticación haya fallado manda un mensaje al formulario de login y también regresamos los valores enviados con withInput().
        		Session::flash('message','Tus datos son incorrectos.');
 			Session::flash('class','danger');
-        return Redirect::to('login')
-				    ->withInput();
+        	return Redirect::to('login')->withInput();
 	}
 
 	public function showsignup()
@@ -81,7 +94,8 @@ class AuthController extends BaseController {
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
-		}
+		}	
+
 			$user->credential=Input::get('credential');
 			$user->names=Input::get('names');
 			$user->surnames=Input::get('surnames');
@@ -89,9 +103,22 @@ class AuthController extends BaseController {
 			$user->email=Input::get('email');
 			$user->municipality_id=Input::get('municipality_id');
 			$user->password=Hash::make(Input::get('password'));
+			$user->confirmation_code = str_random(30);
 		if($user->save())
-		{
-			Session::flash('message','Guardado Correctamente');
+		{	
+				$data2 = [
+					'names' => $user->names,
+					'email' => $user->email,
+					'confirmation_code' => $user->confirmation_code,
+				];
+	
+			Mail::send('emails.confirm', $data2, function($message) use ($user)
+			{
+		  	   	$message->from('vzlatrader@vzla.com');
+		   		$message->to($user->email, $user->names)->subject('Confirma tu cuenta');
+
+			});
+			Session::flash('message','Gracias por registrarse! Revisa tu email para confirmar tu cuenta.');
 			Session::flash('class','success');
 			return Redirect::to('login');
 		}
@@ -101,7 +128,10 @@ class AuthController extends BaseController {
 			Session::flash('class','danger');
 			return Redirect::to('signup');
 		}
-		
+
+
+
+        
 	
 	}
 	public function update($id){
@@ -154,6 +184,36 @@ class AuthController extends BaseController {
 		$user = User::findOrFail($id);
 		return View::make('profile.profile', compact('user'));
 	}
+
+	public function confirm($confirmation_code)
+    {
+        if( !$confirmation_code)
+        {
+        	Session::flash('message','No hay ningu coigo de confirmacion');
+			Session::flash('class','danger');
+        	return View::make('login.fail');
+            // throw new InvalidConfirmationCodeException;
+        }
+
+        $user = User::where('confirmation_code','=', $confirmation_code)->first();
+
+        if ( !$user)
+        {
+        	Session::flash('message','Confirmacion no existente');
+			Session::flash('class','danger');
+			return View::make('login.fail');
+            // throw new InvalidConfirmationCodeException;
+        }
+
+        $user->confirmed = 1;
+        $user->confirmation_code = null;
+        $user->save();
+
+        Session::flash('message','Cuenta confirmada');
+		Session::flash('class','success');
+
+        return Redirect::to('login');
+    }
 	/**
 	 * Muestra el formulario de login mostrando un mensaje de que cerro sesión.
 	 */

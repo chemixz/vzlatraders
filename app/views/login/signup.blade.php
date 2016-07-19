@@ -1,5 +1,6 @@
 @extends('login.login_layout')
 @section('content')
+    <div class="row">
   		<div class="col-xs-5 center-block placeholder no-float" ng-app="loginAngular" style="margin-top: 3em;"> 
           @if(Session::has('message'))  
           <div class="alert alert-{{ Session::get('class') }} fade in">

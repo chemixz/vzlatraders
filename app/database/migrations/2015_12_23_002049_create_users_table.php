@@ -25,6 +25,8 @@ class CreateUsersTable extends Migration {
 	        $table->string('remember_token',100);
 	        $table->integer('municipality_id')->unsigned();
 			$table->foreign('municipality_id')->references('id')->on('municipalities')->onDelete('cascade');
+			$table->boolean('confirmed')->default(0);
+			$table->string('confirmation_code')->nullable();
 	        $table->timestamps();
 	    });
 	}

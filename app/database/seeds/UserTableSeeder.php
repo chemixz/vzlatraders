@@ -13,6 +13,7 @@ class UserTableSeeder extends Seeder {
             'tlf' => '2351310',
             'municipality_id' => 315,
             'level' => 2,
+            'confirmed' => 1,
             'password' => Hash::make('2351310') // Hash::make() nos va generar una cadena con nuestra contraseña encriptada
         ));
          User::create(array(
@@ -23,6 +24,7 @@ class UserTableSeeder extends Seeder {
             'tlf' => '2316114',
             'municipality_id' => 315,
             'level' => 1,
+            'confirmed' => 1,
             'password' => Hash::make('12345678') // Hash::make() nos va generar una cadena con nuestra contraseña encriptada
         ));
         User::create(array(
@@ -33,6 +35,7 @@ class UserTableSeeder extends Seeder {
             'tlf' => '5555555',
             'municipality_id' => 315,
             'level' => 1,
+            'confirmed' => 1,
             'password' => Hash::make('12345678') // Hash::make() nos va generar una cadena con nuestra contraseña encriptada
         ));
 
