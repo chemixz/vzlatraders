@@ -24,13 +24,13 @@ class PublicationsController extends \BaseController {
 		Session::forget('state_id');
 		$session = Input::get('state_id');
         Session::put('state_id',$session);
-        return Redirect::to('/');
+        return Redirect::to('/publications');
 	}
 	public function set_select_cat(){
 		Session::forget('category_id');
 		$cat = Input::get('category_id');
         Session::put('category_id',$cat);
-        return Redirect::to('/');
+        return Redirect::to('/publications');
 	}
 
 	public function mypublications()

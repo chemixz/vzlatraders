@@ -58,6 +58,9 @@
                    <p class="text-center">
                       <span class="text-muted">{{ Auth::user()->email; }}</span>
                   </p>
+                  <li><a href="{{URL::to('/')}}/profile/{{Auth::user()->id}}">Mi Perfil </a></li>
+                  <li><a href="{{URL::to('/')}}/mypublications">Mis publicaciones</a></li>
+                  <li><a href="">Mis Intercambios</a></li>
                   <li> {{ HTML::link('/publications/new' , ' Nueva Publicacion' ) }}</li>
                     @if (Auth::user()->level > 1)
                        <li class="text-left">
@@ -68,7 +71,9 @@
                        </li>
                     @endif
                     <br>
-                    {{ HTML::link('/logout', 'Cerrar sesión.') }}
+                     <li class="text-center">
+                      {{ HTML::link('/logout', 'Cerrar sesión.') }}
+                    </li>
                   @else
                     <span class="text-muted">Visitor</span>
                   @endif
