@@ -63,6 +63,8 @@
               <a class="btn btn-danger" href="{{URL::to('/')}}/" data-toggle="tooltip" data-placement="top" title="Atras"><span class=" glyphicon glyphicon-arrow-left"></span></a>
              @if (Auth::user()->id == $publication->user->id)
               <a class="btn btn-success" href="{{URL::to('/')}}/publications/edit/{{$publication->id}}" data-toggle="tooltip" data-placement="top" title="Editar"><span class="glyphicon glyphicon-edit"></span></a>
+              <a class="btn btn-danger" href="{{URL::to('/')}}/publications/destroy/{{$publication->id}}" data-toggle="tooltip" data-placement="top" title="Borrar"><span class="glyphicon glyphicon-trash"></span></a>
+              
              @endif
          </div>
          @if ( count( $exchange) > 0 )

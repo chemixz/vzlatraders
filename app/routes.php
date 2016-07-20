@@ -24,15 +24,20 @@ Route::post('login', 'AuthController@postLogin');
 Route::group(array('before' => 'auth'), function()
 {
 	// Esta será nuestra ruta de bienvenida.
-	Route::get('/', 'PublicationsController@index');
+	Route::get('/', 'HomeController@index');
+	
+	Route::get('/publications', 'PublicationsController@index');
 	Route::post('select_state', 'PublicationsController@set_select_session');
 	Route::post('select_cat', 'PublicationsController@set_select_cat');
+
+	Route::get('/mypublications', 'PublicationsController@mypublications');
+
 
 	Route::get('publications/new', 'PublicationsController@create');
 	Route::post('publications/store', 'PublicationsController@store');
 	Route::get('publications/show/{id}', 'PublicationsController@show');
-
 	Route::get('publications/edit/{id}', 'PublicationsController@edit');
+
 	Route::get('publications/destroy/{id}', 'PublicationsController@destroy');
 	Route::post('publications/update/{id}','PublicationsController@update');
 

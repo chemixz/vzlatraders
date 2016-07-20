@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1"> <!--adapta la pantalla-->
 <title>VzlaTraders</title>
-  {{ HTML::style ('assets/css/bootstrap-theme.css', array ('media'=>'screen')) }}
   {{ HTML::style ('assets/css/bootstrap.css', array ('media'=>'screen')) }}
+  {{ HTML::style ('assets/css/bootstrap-theme.css', array ('media'=>'screen')) }}
   {{ HTML::style ('assets/css/sidebar.css', array ('media'=>'screen')) }}
   {{ HTML::style ('assets/css/mystyle.css', array ('media'=>'screen')) }}
 
@@ -33,18 +33,15 @@
               </button>
               <div class="collapse navbar-collapse" id="collapse1vz">
               <ul class="nav navbar-nav">
-                <li class=""><a href="{{URL::to('/')}}/profile/{{Auth::user()->id}}">Perfil </a></li>
-                <li><a href="#">Link</a></li>
+                <li><a href="{{URL::to('/')}}/publications/">Publicaciones</a></li>
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mi menu <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
+                    <li><a href="{{URL::to('/')}}/profile/{{Auth::user()->id}}">Mi Perfil </a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
+                    <li><a href="{{URL::to('/')}}/mypublications">Mis publicaciones</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#">One more separated link</a></li>
+                    <li><a href="">Mis Intercambios</a></li>
                   </ul>
                 </li>
               </ul>

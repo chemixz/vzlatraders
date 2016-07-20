@@ -5,7 +5,7 @@
           @foreach ($Mu->publications as $P )
              <div class="panel panel-custom  public_box"  style="border-color: {{$P->category->codecolor}}"> 
                 <div class="panel-heading-custom " style="background-color: {{$P->category->codecolor}}"> 
-                    <h4 class="panel-title text-center">{{ $P->category->name}}</h4>
+                    <h4 class="panel-title text-center">{{ $P->user->names}}</h4>
                 </div> 
                 <div class="contenido public_box_content" id="">
                   <div class="text-center">

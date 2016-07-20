@@ -32,6 +32,8 @@ App::after(function($request, $response)
 | integrates HTTP Basic authentication for quick, simple checking.
 |
 */
+
+
 Route::filter('isAdmin', function()
 {
 	if (Auth::user()->level != 2)

@@ -17,7 +17,7 @@ class PublicationsController extends \BaseController {
 		$sessionid = Session::get('state_id');
 		$municipalities = Municipality::where('state_id','=',Session::get('state_id'))->orderBy(DB::raw('RAND()'))->get();
 		
-		return View::make('principal.index', compact('municipalities','states','categories'));
+		return View::make('publications.index', compact('municipalities','states','categories'));
 	}
 	
 	public function set_select_session(){
@@ -33,6 +33,12 @@ class PublicationsController extends \BaseController {
         return Redirect::to('/');
 	}
 
+	public function mypublications()
+	{
+		$publications = Publication::where('user_id','=',Auth::user()->id )->get();
+		return View::make('mypublications.index', compact('publications'));
+
+	}
 
 	/**
 	 * Show the form for creating a new publication
@@ -98,7 +104,7 @@ class PublicationsController extends \BaseController {
 		Publication::create($data);
 		Session::flash('message','Publicacion creada correctamente');
 		Session::flash('class','success');
-		return Redirect::to('/');
+		return Redirect::to('/mypublications');
 
 	}
 
@@ -196,9 +202,27 @@ class PublicationsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		Publication::destroy($id);
+		$publication =  Publication::find($id);
+	
+		// Publication::destroy($id);
 
-		return Redirect::to('/');
+		if( Authentications::Owner( $publication->user->id , Auth::user()->id ) )
+		{
+			Publication::destroy($id);
+			ession::flash('message','Publicacion borrada');
+			Session::flash('class','success');
+		
+		}
+		else
+		{
+			Session::flash('message','No tienes permiso para eso');
+			Session::flash('class','danger');
+			
+		}
+		return Redirect::back();
+		// return Redirect::to('/');
+		
+		
 	}
 
 }

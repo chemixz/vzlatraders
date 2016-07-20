@@ -28,15 +28,7 @@
                   {{ Form::label('contraseña', 'Contraseña') }}
                   {{ Form::password('password', array('class' => 'form-control')); }}
                 </div>
-                <div class="form-group">
-                {{ Form::label('states','Estado') }}
-                  <select name="state_id" class="form-control">
-                    <option selected  value="">Elija un Estado</option>
-                    @foreach ($states as $S)
-                      <option value="{{$S->id}}">{{$S->name}}</option>
-                    @endforeach
-                  </select>
-                </div >
+               
                 <div class="checkbox">
                   <label>
                       Recordar contraseña

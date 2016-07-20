@@ -256,3 +256,34 @@ hr{
 .bootstrap_proposal_box_content:nth-child(even) {
     background-color:  #F0F8FF;
 }
+
+
+.white
+{
+  color: white;
+}
+
+.red{
+  color: red;
+}
+.blue{
+  color: #00BFFF;
+}
+.orange{
+  color: orange;
+}
+.green{
+  color: green;
+}
+.darkgreen{
+  color: darkgreen;
+}
+.lightblue{
+  color: lightblue;
+}
+.chocolate{
+  color: #D2691E;
+}
+.darkslategray{
+  color: #2F4F4F;
+}

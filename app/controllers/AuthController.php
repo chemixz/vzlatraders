@@ -13,7 +13,7 @@ class AuthController extends BaseController {
 	 */
 	public function showLogin()
 	{
-		$states = State::all();
+		// $states = State::all();
 		// Verificamos que el usuario no esté autenticado
 		if (Auth::check())
 		{
@@ -37,9 +37,7 @@ class AuthController extends BaseController {
             'email' => Input::get('email'),
             'password'=> Input::get('password')
         );
-		$search = Input::get('state_id');
-        Session::put('state_id',$search);
- 		
+		
        	$validator = Validator::make($data = Input::all() , User::$ruleslogin, User::$messageregister);
 		if ($validator->fails())
 		{
@@ -60,6 +58,10 @@ class AuthController extends BaseController {
 			Session::flash('class','danger');
 	        return Redirect::to('login')->withInput();
 		}
+		$search = $user->municipality->state->id;
+        Session::put('state_id',$search);
+        
+ 		
         // dd(Session::get('Searcher'));
 		// Validamos los datos y además mandamos como un segundo parámetro la opción de recordar el usuario.
         if(Auth::attempt($userdata, Input::get('remember-me', 0)))
