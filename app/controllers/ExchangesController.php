@@ -102,11 +102,11 @@ class ExchangesController extends \BaseController {
 			// echo "<pre>";
 			// dd($newPathWithName1);
 			// echo "</pre>";
-			// File::copy($image1,$newPathWithName1);
-			// File::copy($image2,$newPathWithName2);
+			File::copy($image1,$newPathWithName1);
+			File::copy($image2,$newPathWithName2);
 			
-			// Exchange::create($data[0]);
-			// Exchange::create($data[1]);
+			Exchange::create($data[0]);
+			Exchange::create($data[1]);
 
 			$user = User::find($proposal->user->id );
 				$data = [

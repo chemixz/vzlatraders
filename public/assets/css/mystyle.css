@@ -217,10 +217,12 @@ hr{
   overflow: auto;
    height: 400px;
   background-color: #C0C0C0;
+  border-radius: 10px 10px 10px 10px;
 }
 .bootstrap_comment_box_content{
   background-color: gray; padding: 1em;
   margin-top: 1em;
+  border-radius: 10px 10px 10px 10px;
 }
 .bootstrap_comment_box_content:nth-child(odd) {
     background-color:   #F5F5F5;
@@ -244,10 +246,12 @@ hr{
     overflow: auto;
     height: 600px;
     background-color: #C0C0C0;
+    border-radius: 10px 10px 10px 10px;
 }
 .bootstrap_proposal_box_content{
   background-color: gray; padding: 1em;
   margin-top: 1em;
+  border-radius: 10px 10px 10px 10px;
 }
 .bootstrap_proposal_box_content:nth-child(odd) {
     background-color:   #F5F5F5;

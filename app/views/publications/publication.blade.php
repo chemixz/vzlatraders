@@ -29,7 +29,7 @@
                     @if (Auth::user()->id == $P->user->id)
                     <a class="btn btn-success" href="{{URL::to('/')}}/publications/edit/{{$P->id}}" data-toggle="tooltip" data-placement="top" title="Editar"><span class="glyphicon glyphicon-edit"></span></a>
                     @endif
-                    <a href="#" class="btn btn-warning "  data-toggle="tooltip" data-placement="top" title="Intercambios"><span class="glyphicon glyphicon-random" style="font-size: 15px; "></span> <span class="badge"><span style="color: black;"> 0 </span></span></a>
+                    <a href="#" class="btn btn-warning "  data-toggle="tooltip" data-placement="top" title="Intercambios"><span class="glyphicon glyphicon-random" style="font-size: 15px; "></span> <span class="badge"><span style="color: black;"> {{ count($P->exchanges) }} </span></span></a>
                     <span class="btn btn-info " style="float: right; margin-right: 1em;" data-toggle="tooltip" data-placement="top" title="Propuestas"><span class="glyphicon glyphicon-comment" style="font-size: 15px; color:black"></span> <span class="badge"><span style="color: black;">{{ count($P->proposals) }}</span></span></span>
                    </p>
                 </div>

@@ -19,7 +19,7 @@
            </div>
        @endif
   			 <div class="text-center thumbnail">
-               <img width="100%" height="500px" src="{{URL::to('/')}}/uploads/images/publications/user_{{$publication->user->id}}/{{$publication->picture}}" >
+               <img width="100%" height="500px" src="{{URL::to('/')}}/uploads/images/publications/user_{{$publication->user->id}}/{{$publication->picture}}" class="img-responsive" >
          </div>
                   <div class="col-md-12 "  style="padding-left: 0;">
                       <div class="col-md-4 thumbnail"  >
@@ -76,7 +76,7 @@
                  <div class="col-md-5" >
                     <div class="col-md-12 " >
                         <a href="">
-                            <img width="100%" height="200" src="{{URL::to('/')}}/uploads/images/publications/user_{{$publication->user->id}}/exchanges/{{$exchange[0]->publication_picture}}" alt="">
+                            <img width="100%" height="200" class="thumbnail" src="{{URL::to('/')}}/uploads/images/publications/user_{{$publication->user->id}}/exchanges/{{$exchange[0]->publication_picture}}" alt="">
                         </a>
                         <strong>Autor :</strong> {{$exchange[0]->publication_autor_names}}
                     </div>
@@ -87,7 +87,7 @@
                   <div class="col-md-5">
                     <div class="col-md-12 ">
                       <a href="">
-                           <img width="100%" height="200" src="{{URL::to('/')}}/uploads/images/publications/user_{{$publication->user->id}}/exchanges/{{$exchange[0]->proposal_picture}}" alt="">
+                           <img width="100%" height="200" class="thumbnail" src="{{URL::to('/')}}/uploads/images/publications/user_{{$publication->user->id}}/exchanges/{{$exchange[0]->proposal_picture}}" alt="">
                       </a>
                       <strong>Autor :</strong> {{$exchange[0]->proposal_autor_names}}
                     </div>
@@ -104,12 +104,12 @@
             @if (count($publication->proposals)>0)
                 @foreach ($publication->proposals as $Pro)
                   <div class="col-md-12 bootstrap_proposal_box_content" >
-                      <div class="col-md-5" ng-controller="OpenImageController">
+                      <div class="col-md-4" ng-controller="OpenImageController">
                           <a href="" ng-click="openImage({{$Pro->id}})" >
                               <img width="100%" height="150" src="{{URL::to('/')}}/uploads/images/publications/user_{{$publication->user->id}}/proposals/{{$Pro->picture}}" id="pro_image_{{$Pro->id}}"  alt="">
                           </a>
                       </div>
-                      <div class="col-md-7 bootstrap_comment_box_parraph">
+                      <div class="col-md-8 bootstrap_comment_box_parraph">
                           <h4>{{$Pro->user->names}} Dijo:</h4> 
                           <p>{{$Pro->description}}</p>
                          <div class="text-right  ">
