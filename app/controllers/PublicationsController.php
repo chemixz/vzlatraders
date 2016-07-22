@@ -70,7 +70,7 @@ class PublicationsController extends \BaseController {
 	 */
 	public function store()
 	{
-
+		// dd(Input::all());
 		$validator = Validator::make($data = Input::all(), Publication::$rules);
 
 		if ($validator->fails())
@@ -78,27 +78,34 @@ class PublicationsController extends \BaseController {
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 		
-		if (Input::file('picture'))
-		 {
-			$file = Input::file('picture');		
-
-			$destinationPath = 'uploads/images/publications/user_'.Auth::user()->id.'/';
-			// File::makeDirectory($destinationPath, $mode = 0777, true, true);
-			$filename = 'pub_'.Auth::user()->id.'_'.Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
-			$mimeType = $file->getMimeType();
-			$extension = $file->getClientOriginalExtension();
-			$upload_success = $file->move($destinationPath,$filename);
+		$destinationPath = 'uploads/images/publications/user_'.Auth::user()->id.'/';
+		for ($i=1; $i <= 3 ; $i++) { 
 			
-			// if($familia->picture!='package.png')
-			// {
-			// 	File::delete($destinationPath.$familia->picture);
-			// }
-			$data['picture'] = $filename;
-							
-		}
-		else
-		{
-			unset($data['picture']);
+			if (Input::file('picture'.$i))
+			 {
+				$file = Input::file('picture'.$i);		
+
+				// File::makeDirectory($destinationPath, $mode = 0777, true, true);
+				$filename = 'pub_'.Auth::user()->id.'_'.Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
+				// if ( $data['radiocover'] == $i) 
+				// {
+				// 	$data['cover'] = $filename;
+				// }
+				$mimeType = $file->getMimeType();
+				$extension = $file->getClientOriginalExtension();
+				$upload_success = $file->move($destinationPath,$filename);
+				
+				// if($familia->picture!='package.png')
+				// {
+				// 	File::delete($destinationPath.$familia->picture);
+				// }
+				$data['picture'.$i] = $filename;
+								
+			}
+			else
+			{
+				unset($data['picture'.$i]);
+			}
 		}
 	
 		Publication::create($data);
@@ -117,8 +124,11 @@ class PublicationsController extends \BaseController {
 	public function show($id)
 	{
 		$publication = Publication::findOrFail($id);
-		$exchange = Exchange::where('publication_id', '=',$id )->where('user_id','=', $publication->user->id )->get();
-		return View::make('publications.show', compact('publication','exchange'));
+		$exchanges = Exchange::where('publication_id', '=',$id )->get();
+		// echo "<pre>";
+		// dd($exchange[0]);
+		// echo "</pre>";
+		return View::make('publications.show', compact('publication','exchanges'));
 	}
 
 	/**
@@ -161,37 +171,50 @@ class PublicationsController extends \BaseController {
 	 */
 	public function update($id)
 	{
+		// dd(Input::all());
 		$publication = Publication::findOrFail($id);
-
+		
 		$validator = Validator::make($data = Input::all(), Publication::$rules);
 
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
-		if (Input::file('picture'))
-		 {
-			$file = Input::file('picture');		
-
-			$destinationPath = 'uploads/images/publications/user_'.Auth::user()->id.'/';
-			$filename = 'pub_'.Auth::user()->id.'_'.Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
-			// $filename = Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
-			$mimeType = $file->getMimeType();
-			$extension = $file->getClientOriginalExtension();
-			$upload_success = $file->move($destinationPath,$filename);
-			File::delete($destinationPath.$publication->picture);
+		$destinationPath = 'uploads/images/publications/user_'.Auth::user()->id.'/';
+		for ($i=1; $i <= 3 ; $i++) { 
 			
-			$data['picture'] = $filename;
-							
-		}
-		else
-		{
-			unset($data['picture']);
+			if (Input::file('picture'.$i))
+			 {
+				$file = Input::file('picture'.$i);		
+
+				// File::makeDirectory($destinationPath, $mode = 0777, true, true);
+				$filename = 'pub_'.Auth::user()->id.'_'.Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
+				// if ( $data['radiocover'] == $i) 
+				// {
+				// 	$data['cover'] = $filename;
+				// }
+				$mimeType = $file->getMimeType();
+				$extension = $file->getClientOriginalExtension();
+				$upload_success = $file->move($destinationPath,$filename);
+				$mivar = 'picture'.$id;
+				File::delete($destinationPath.$publication->$mivar);
+	
+				$data['picture'.$i] = $filename;
+								
+			}
+			else
+			{
+				unset($data['picture'.$i]);
+			}
 		}
 
 		$publication->update($data);
 
-		return Redirect::to('/');
+		return Redirect::to('/mypublications');
+
+
+
+
 	}
 
 	/**

@@ -3,7 +3,7 @@
 $(document).ready(function(){
 
 
-	$('.picture , .photo').on('change', function(event) {
+	$('.photo').on('change', function(event) {
 		var files = event.target.files;
 		var image = files[0]
 		var reader = new FileReader();
@@ -16,12 +16,11 @@ $(document).ready(function(){
 		  img.setAttribute("width", "100%");
 		  img.setAttribute("height", "500px");
 		  $('#target').html(img);
-		  $('#target_new_proposal').html(img);
 	
 		}
 		
 		reader.readAsDataURL(image);
-		console.log(files);
+		// console.log(files);
 	});
 
 	$(function () {

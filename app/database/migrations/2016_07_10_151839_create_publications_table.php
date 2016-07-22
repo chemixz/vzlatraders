@@ -17,9 +17,13 @@ class CreatePublicationsTable extends Migration {
 			$table->increments('id');
 	       	$table->text('description');
 	       	$table->text('changeoptions',200);
-	       	$table->string('picture',200)->default('package.jpg');
-			$table->enum('status', array('Active', 'Inactive','Finished'))->default('Inactive');
+	       	$table->string('picture1',200)->default('package.jpg');
+	       	$table->string('picture2',200)->default('package.jpg');
+	       	$table->string('picture3',200)->default('package.jpg');
+	       	$table->integer('cover')->default(0);
+			$table->enum('status', array('active', 'inprogress','completed'))->default('active');
 			$table->integer('user_id')->unsigned();
+			$table->integer('stock');
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			$table->integer('category_id')->unsigned();
 			$table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

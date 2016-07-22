@@ -26,20 +26,19 @@ Route::group(array('before' => 'auth'), function()
 	// Esta será nuestra ruta de bienvenida.
 	Route::get('/', 'HomeController@index');
 	
-	Route::get('/publications', 'PublicationsController@index');
+	Route::get('publications', 'PublicationsController@index');
 	Route::post('select_state', 'PublicationsController@set_select_session');
 	Route::post('select_cat', 'PublicationsController@set_select_cat');
 
-	Route::get('/mypublications', 'PublicationsController@mypublications');
+	Route::get('mypublications', 'PublicationsController@mypublications');
 
 
 	Route::get('publications/new', 'PublicationsController@create');
 	Route::post('publications/store', 'PublicationsController@store');
 	Route::get('publications/show/{id}', 'PublicationsController@show');
 	Route::get('publications/edit/{id}', 'PublicationsController@edit');
-
-	Route::get('publications/destroy/{id}', 'PublicationsController@destroy');
 	Route::post('publications/update/{id}','PublicationsController@update');
+	// Route::get('publications/destroy/{id}', 'PublicationsController@destroy');
 
 	
 	Route::post('comments/store/{id}', 'CommentsController@store');
@@ -54,6 +53,7 @@ Route::group(array('before' => 'auth'), function()
 
 	Route::get('exchanges/new/{id}', 'ExchangesController@newEx');
 	Route::get('exchanges/show/{id}', 'ExchangesController@show');
+	Route::get('exchanges/complete/{id}' ,'ExchangesController@completeEx');
 
 
 	// Esta ruta nos servirá para cerrar sesión.

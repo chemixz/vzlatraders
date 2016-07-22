@@ -2,7 +2,10 @@ angular.module("angularFront",[])
 	  .value('server', 'http://vzlatraders.local')
 
 //  Calling Form  Publication edit and create  
-	.controller("Publication_Controller_Create_Edit_GetStates", function ($scope,$http){
+	.controller("Publication_Create_Edit_Controller", function ($scope,$http){
+		$('#file_picture1').val('');
+		$('#file_picture2').val('');
+		$('#file_picture3').val('');
 
 		
 		$("#state_select").change(function(event) {
@@ -34,13 +37,39 @@ angular.module("angularFront",[])
 			};
 		});
 
+		$scope.onFileLoad = function(element ,id){
+			$scope.$apply(function(scope) {
+		         var photofile = element.files[0];
+		         var reader = new FileReader();
+		         reader.onload = function(e) {
+		         	var img = new Image();
+		         	 img.setAttribute("class", "img-responsive");
+					 img.setAttribute("width", "100%");
+
+					console.log(id);
+ 					 img.src = e.target.result;
+ 					 $('#target_create_'+id).html(img).addClass('height',"400px");
+		         };
+		         reader.readAsDataURL(photofile);
+		     });
+
+		}
+
 	})
 // End Calling Form Folder Principal index 
 
 
 // Calling Form Publication Show 
 
-	.controller("Modal_Proposer_Controller",function ($scope,$http){
+	.controller("Publication_Show_Controller",function ($scope,$http){
+
+		$scope.setCover = function(cover_id){
+			imgSrc = $('#cover_picture_'+cover_id).attr('src');
+			console.log(imgSrc);
+
+			$('#cover').attr('src', imgSrc);
+
+		}
 		$scope.editProposal = function(id_proposal){
 			
 			$http.get('/proposals/edit/'+id_proposal)
@@ -67,7 +96,7 @@ angular.module("angularFront",[])
 
 				});
 		}
-		$scope.onFileLoad = function(element){
+		$scope.onFileLoad = function(element ,id){
 			$scope.$apply(function(scope) {
 		         var photofile = element.files[0];
 		         var reader = new FileReader();
@@ -75,7 +104,7 @@ angular.module("angularFront",[])
 		         	var img = new Image();
 		         	 img.setAttribute("class", "img-responsive");
 					 img.setAttribute("width", "100%");
-					
+					console.log(id);
  					 img.src = e.target.result;
  					 $('#target_proposal_img').html(img);
 		         };
@@ -89,32 +118,29 @@ angular.module("angularFront",[])
 		}
 		$scope.submit =function(){
 			$('#form_proposal').submit();
-		}
-	
+		}	
+		// .controller("Exchange_Controller",function ($scope,$http){
+		// 	$scope.acceptEx = function(id_proposal){
+		// 		imgSrc = $('#pro_image_'+id_proposal).attr('src');
+
+		// 		alert("Acepto"+imgSrc);
+
+
+		// 		var form = $('<form/>', {action : '/exchanges/new/'+id_proposal, method : 'POST', enctype:'multipart/form-data'}).appendTo('#hiddenform');
+		// 		form.append("<div class= 'appm'>Save this</div>");
+		// 		form.append("<input type='file'  name='img_pro"+id_proposal+"' value='"+imgSrc+"' src='"+imgSrc+"' />");
+		// 		form.append("<input type='text' placeholder='description' id='rdescription' name='routedescription' class= 'address'/>");
+		// 		form.append("<input type='text' placeholder='tags' id='tags' name='routetags'  />");
+		// 		form.append("<br/><input type='submit' id='savebutton' value='Save' />");
 		
-	})
 
-	// .controller("Exchange_Controller",function ($scope,$http){
-	// 	$scope.acceptEx = function(id_proposal){
-	// 		imgSrc = $('#pro_image_'+id_proposal).attr('src');
-
-	// 		alert("Acepto"+imgSrc);
-
-
-	// 		var form = $('<form/>', {action : '/exchanges/new/'+id_proposal, method : 'POST', enctype:'multipart/form-data'}).appendTo('#hiddenform');
-	// 		form.append("<div class= 'appm'>Save this</div>");
-	// 		form.append("<input type='file'  name='img_pro"+id_proposal+"' value='"+imgSrc+"' src='"+imgSrc+"' />");
-	// 		form.append("<input type='text' placeholder='description' id='rdescription' name='routedescription' class= 'address'/>");
-	// 		form.append("<input type='text' placeholder='tags' id='tags' name='routetags'  />");
-	// 		form.append("<br/><input type='submit' id='savebutton' value='Save' />");
-	
-
+				
+		// 	}	
+		// 	//{{URL::to('/')}}/exchanges/new/{{$Pro->id}}
 			
-	// 	}	
-	// 	//{{URL::to('/')}}/exchanges/new/{{$Pro->id}}
-		
-	// })
-	.controller("OpenImageController", function ($scope,$http,server){
+		// })
+
+	// .controller("OpenImageController", function ($scope,$http,server){
 		$scope.openImage = function(id_proposal){
 			
 			imgSrc = $('#pro_image_'+id_proposal).attr('src');
@@ -124,8 +150,8 @@ angular.module("angularFront",[])
 			$('#modalImage').modal();
 			console.log(imgSrc);
 		}
-	})
-	.controller("Modal_Comment_Controller", function ($scope,$http,server){
+	// })
+	// .controller("Modal_Comment_Controller", function ($scope,$http,server){
 		$scope.editComment = function(id_comment)
 		{
 			$http.get('/comments/edit/'+id_comment)
@@ -144,26 +170,26 @@ angular.module("angularFront",[])
 			$('#form_comment').attr('action', '/comments/store/'+id_publication);
 			$('#modalcomment').modal();
 		}
-		$scope.submit = function()
+		$scope.submitcoment = function()
 		{
 			$('#form_comment').submit();
 		}
 		
-	})
-	 img = new Image();
-	
-	$('#modalcomment').on('hidden.bs.modal', function () {
-		 $('#text_comment_modal').val('');
-	})
-	$('#modalImage').on('hidden.bs.modal', function () {
+	// })
+		img = new Image();
 		
-		 $('#targetViewImage').html(img);
-	})
-	$('#modalproposal').on('hidden.bs.modal', function () {
-		$('#target_proposal_img').html(img);
-		$('#file_picture').val('');
-		$('#description_proposal').val('');
-	})
+		$('#modalcomment').on('hidden.bs.modal', function () {
+			 $('#text_comment_modal').val('');
+		})
+		$('#modalImage').on('hidden.bs.modal', function () {
+			
+			 $('#targetViewImage').html(img);
+		})
+		$('#modalproposal').on('hidden.bs.modal', function () {
+			$('#target_proposal_img').html(img);
+			$('#file_picture').val('');
+			$('#description_proposal').val('');
+		})
 
-
+	})
 // End Calling Form Publication Show 

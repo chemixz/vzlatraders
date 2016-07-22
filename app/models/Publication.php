@@ -3,13 +3,17 @@
 class Publication extends \Eloquent {
 
 	protected $table = 'publications';
-	protected $fillable =['description','changeoptions','picture','status','user_id','category_id','municipality_id'];
+	protected $fillable =['description','changeoptions','picture1','picture2','picture3','status','stock','cover','user_id','category_id','municipality_id'];
 	protected $guarded = ['id'];
 
 	 public static $rules = [
 	 	'description'  => 'required',
 	 	'changeoptions' => 'required',
-	 	'picture'  => 'mimes:jpg,jpeg,png',
+	 	'picture1'  => 'mimes:jpg,jpeg,png',
+	 	'picture2'  => 'mimes:jpg,jpeg,png',
+	 	'picture2'  => 'mimes:jpg,jpeg,png',
+	 	'stock' => 'required',
+	 	'cover' => 'required',
 	 	'category_id' => 'required',
 	 	'municipality_id' => 'required',
 	 ];

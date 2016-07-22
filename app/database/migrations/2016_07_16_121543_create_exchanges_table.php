@@ -15,11 +15,10 @@ class CreateExchangesTable extends Migration {
 		Schema::create('exchanges', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('publication_picture',100);
-			$table->string('publication_autor_names',100);
 			$table->string('proposal_picture',100);
 			$table->string('proposal_autor_names',100);
-			$table->enum('status', array('progress','canceled','finished'))->default('progress');
+			$table->enum('status', array('inprogress','canceled','completed'))->default('inprogress');
+			$table->boolean('complete')->default(0);
 			$table->integer('user_id')->unsigned();
 			$table->foreign('user_id')->references('id')->on('users');
 			$table->integer('publication_id')->unsigned();

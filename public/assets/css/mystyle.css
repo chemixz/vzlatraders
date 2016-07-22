@@ -39,7 +39,9 @@ hr{
 .container-body{
 	margin-top: 1em;
 }
-
+.mythumb{
+  border: solid 3px white;
+}
 .floating-bottom {
 
  bottom:12px;

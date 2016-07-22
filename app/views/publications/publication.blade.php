@@ -8,8 +8,9 @@
                     <h4 class="panel-title text-center">{{ $P->user->names}}</h4>
                 </div> 
                 <div class="contenido public_box_content" id="">
-                  <div class="text-center">
-                      <img width="100%" height="200" src="{{URL::to('/')}}/uploads/images/publications/user_{{$P->user->id}}/{{$P->picture}}">
+                  <div class="text-center"> 
+                      <?php  $mivar = 'picture'.$P->cover; ?>
+                      <img width="100%" height="200" src="{{URL::to('/')}}/uploads/images/publications/user_{{$P->user->id}}/{{$P->$mivar}} ">
                   </div>
                   <div class="public_box_content_description">
                     

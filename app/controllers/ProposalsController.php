@@ -168,11 +168,11 @@ class ProposalsController extends \BaseController {
 
 		if ($proposal->user->id == Auth::user()->id || $proposal->publication->user->id == Auth::user()->id ) {
 				
-				$destinationPath = 'uploads/images/publications/user_'.$proposal->publication->user->id.'/proposals/';
-				File::delete($destinationPath.$proposal->picture);
-				Proposal::destroy($id);
-				Session::flash('message','Propuesta borrada');
-				Session::flash('class','success');
+			$destinationPath = 'uploads/images/publications/user_'.$proposal->publication->user->id.'/proposals/';
+			File::delete($destinationPath.$proposal->picture);
+			Proposal::destroy($id);
+			Session::flash('message','Propuesta borrada');
+			Session::flash('class','success');
 				
 			
 		}

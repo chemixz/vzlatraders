@@ -21,7 +21,8 @@
         <tbody>
         @foreach ($publications as $P)
             <tr>
-              <td><img  width="80%" class="img-responsive thumbnail" src="{{URL::to('/')}}/uploads/images/publications/user_{{$P->user->id}}/{{$P->picture}}"></td>
+              <?php  $mivar = 'picture'.$P->cover; ?>
+              <td><img  width="80%" class="img-responsive thumbnail" src="{{URL::to('/')}}/uploads/images/publications/user_{{$P->user->id}}/{{$P->$mivar}}"></td>
               <td><p>{{$P->description}}</p></td>
               <td class="text-center" ><a href="{{URL::to('/')}}/publications/show/{{$P->id}}" ><span class="glyphicon glyphicon-search"></span></a></td>
               <td class="text-center" ><a href="{{URL::to('/')}}/publications/edit/{{$P->id}}" ><span class="glyphicon glyphicon-pencil darkgreen"></span></a></td>

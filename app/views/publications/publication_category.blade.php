@@ -4,11 +4,12 @@
             @if ($P->category_id == Session::get('category_id'))
              <div class="panel panel-custom  public_box"  style="border-color: {{$P->category->codecolor}}"> 
                 <div class="panel-heading-custom " style="background-color: {{$P->category->codecolor}}"> 
-                    <h4 class="panel-title text-center">{{ $P->category->name}}</h4>
+                    <h4 class="panel-title text-center">{{ $P->user->names}}</h4>
                 </div> 
                 <div class="contenido public_box_content" id="">
                   <div class="text-center">
-                      <img width="100%" height="200" src="{{URL::to('/')}}/uploads/images/publications/user_{{$P->user->id}}/{{$P->picture}}">
+                       <?php  $mivar = 'picture'.$P->cover; ?>
+                      <img width="100%" height="200" src="{{URL::to('/')}}/uploads/images/publications/user_{{$P->user->id}}/{{$P->$mivar}} ">
                   </div>
                   <div class="public_box_content_description">
                     <p class="text-justify ">

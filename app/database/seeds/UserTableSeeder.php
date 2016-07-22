@@ -38,6 +38,17 @@ class UserTableSeeder extends Seeder {
             'confirmed' => 1,
             'password' => Hash::make('12345678') // Hash::make() nos va generar una cadena con nuestra contraseña encriptada
         ));
+        User::create(array(
+            'credential'  => 9179526,
+            'names'=> 'Milangela Del Carmem',
+            'surnames'=> 'Garces Linares',
+            'email'     => 'garcesmili21@gmail.com',
+            'tlf' => '2712351310',
+            'municipality_id' => 315,
+            'level' => 1,
+            'confirmed' => 1,
+            'password' => Hash::make('12345678') // Hash::make() nos va generar una cadena con nuestra contraseña encriptada
+        ));
 
     }
 }

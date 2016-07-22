@@ -10,6 +10,8 @@
 			<br>
 			Tu propuesta: {{$proposal}}
 			<br>
+			Por:
+			<br>
 			Producto: {{$publication}}
 			<br>
 			<p>
