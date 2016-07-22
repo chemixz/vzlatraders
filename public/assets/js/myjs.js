@@ -3,7 +3,7 @@
 $(document).ready(function(){
 
 
-	$('.photo').on('change', function(event) {
+	$('.picture').on('change', function(event) {
 		var files = event.target.files;
 		var image = files[0]
 		var reader = new FileReader();

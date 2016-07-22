@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
-     <div class="row">
-        <div class="col-xs-5 center-block no-float" ng-app="angularFront">
+     <div class="row" ng-app="angularFront">
+        <div class="col-xs-12 col-md-6 center-block no-float" ng-controller="Profile_Controller">
                 @if(Session::has('message'))  <!--muestra mesaje de suceso que viene del homecontrol-->
                 <div class="alert alert-{{ Session::get('class') }} fade in">
                     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">x</button>
@@ -23,18 +23,17 @@
                         <label for="photo"></label>
                         <div class="">
                           <div class="thumbnail" style="overflow:hidden;">
-                            <div id="target">
-                              @if ($user->photo == "default_image.jpg")
-                                    <img width="500" height="500" src="{{URL::to('/')}}/uploads/images/profiles/{{$user->photo}}" class="img-responsive">
-                              @else
-                                    <img  width="500" height="500" src="{{URL::to('/')}}/uploads/images/profiles/user_{{$user->id}}/{{$user->photo}}" class="img-responsive">
-                              @endif
+                            <div id="targetprofile">
+                                <img width="100%" height="500" src="{{URL::to('/')}}/uploads/images/galleries/{{$user->photo}}" class="imythumb">
                             </div>
                             <br>
-                            <input type="file" name="photo" class="picture"  >    
+                            <input type="button" name="buttonImg" ng-click="openGalleries()" value="Agregar Imagen" >    
                           </div>
                         </div>
                       </div>
+                   </div>
+                   <div class="form-grou">
+                     <input type="hidden" id="photo">
                    </div>
                     <div class="form-group">
                         {{ Form::label('credential','Cedula') }}
@@ -56,7 +55,7 @@
                         {{ Form::label('tlf','Telefono') }}
                         {{ Form::number('tlf',$user->tlf ,['class'=>'form-control', 'placeholder'=>'Ingrese  Telefono'] ) }}
                     </div >
-                    <div class="form-group" ng-controller="Publication_Controller_Create_Edit_GetStates">
+                    <div class="form-group" >
                     {{ Form::label('states','Estado') }}
                       <select name="state_id" id="state_select" class="form-control">
                         <option selected  value="">Elija un Estado</option>
@@ -76,12 +75,31 @@
                     </div >
                     <div class="text-center">
                         {{ Form::submit('Actualizar',['class'=>'btn btn-success'] )}}
-                         <a href="{{URL::to('/')}}/login" class="btn btn-primary">Login</a>
+                         <a href="{{URL::to('/')}}/profile" class="btn btn-primary">Atras</a>
                     </div>
-					
 	               
 				          {{ Form::close() }}
                 <br>    
+                <div class="modal fade" id="modalgallery" role="dialog" aria-labelledby="myModalLabelgallery" >
+                  <div class="modal-dialog" role="document" >
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Galeria de imagenes</h4>
+                      </div>
+                      <div class="modal-body">
+                     
+                      <div class="form-group"> 
+                         <img src="" alt="" width="100" height="100">
+                      </div> 
+                      <div class="text-center">
+                        <button type="button"  class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                      </div>
+                 
+                      </div>
+                    </div>
+                  </div>
+                </div>
     		</div>
       </div>
 @stop

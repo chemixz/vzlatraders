@@ -146,26 +146,26 @@ class AuthController extends BaseController {
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 		
-		if (Input::file('photo'))
-		 {
-			$file = Input::file('photo');		
-			$destinationPath = 'uploads/images/profiles/user_'.$user->id.'/';
-			$filename = Str::random(20).'_'.$user->id .'.'. $file->getClientOriginalExtension();
-			$mimeType = $file->getMimeType();
-			$extension = $file->getClientOriginalExtension();
-			$upload_success = $file->move($destinationPath,$filename);
+		// if (Input::file('photo'))
+		//  {
+		// 	$file = Input::file('photo');		
+		// 	$destinationPath = 'uploads/images/profiles/user_'.$user->id.'/';
+		// 	$filename = Str::random(20).'_'.$user->id .'.'. $file->getClientOriginalExtension();
+		// 	$mimeType = $file->getMimeType();
+		// 	$extension = $file->getClientOriginalExtension();
+		// 	$upload_success = $file->move($destinationPath,$filename);
 			
-			if($user->photo!='default_image.jpg')
-			{
-				File::delete($destinationPath.$user->photo);
-			}
-			$data['photo'] = $filename;
+		// 	if($user->photo!='default_image.jpg')
+		// 	{
+		// 		File::delete($destinationPath.$user->photo);
+		// 	}
+		// 	$data['photo'] = $filename;
 			
-		}
-		else
-		{
-			unset($data['photo']);
-		}
+		// }
+		// else
+		// {
+		// 	unset($data['photo']);
+		// }
 		$user->update($data);
 		Session::flash('message','Actualizado Correctamente');
 		Session::flash('class','success');
@@ -181,9 +181,9 @@ class AuthController extends BaseController {
 		return View::make('profile.editprofile', compact('user','states','municipalities'));
 	}
 
-	public function show($id)
+	public function show()
 	{
-		$user = User::findOrFail($id);
+		$user = User::findOrFail(Auth::user()->id);
 		return View::make('profile.profile', compact('user'));
 	}
 

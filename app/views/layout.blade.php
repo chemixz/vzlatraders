@@ -37,7 +37,7 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mi menu <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="{{URL::to('/')}}/profile/{{Auth::user()->id}}">Mi Perfil </a></li>
+                    <li><a href="{{URL::to('/')}}/profile">Mi Perfil </a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="{{URL::to('/')}}/mypublications">Mis publicaciones</a></li>
                     <li role="separator" class="divider"></li>

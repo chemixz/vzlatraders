@@ -4,11 +4,7 @@
 			<div class="col-xs-6 center-block no-float">
 
   			 <div class="text-center thumbnail">
-			     	@if ($user->photo == "default_image.jpg")
-               		<img width="100%" height="500" src="{{URL::to('/')}}/uploads/images/profiles/{{$user->photo}}">
-        	 	@else
-               		<img width="100%" height="500" src="{{URL::to('/')}}/uploads/images/profiles/user_{{$user->id}}/{{$user->photo}}">
-        	 	@endif
+               		<img width="100%" height="500" src="{{URL::to('/')}}/uploads/images/galleries/{{$user->photo}}">
         	 </div>
         	 <h2 class="text-center"> {{$user->product_name}} </h2>
 	         <div class="text-justify">

@@ -6,9 +6,6 @@ Route::get('login', 'AuthController@showLogin');
 Route::get('signup', 'AuthController@showsignup');
 Route::post('signup', 'AuthController@store');
 Route::get('confirm/account/{confirmationcode}' ,'AuthController@confirm');
-Route::get('profile/edit/{id}', 'AuthController@edit');
-Route::post('profile/update/{id}', 'AuthController@update');
-Route::get('profile/{id}', 'AuthController@show');
 // Route::get('states/ajax/{id}', 'StatesController@ajax');
 Route::get('states/ajax/{id}', function($id)
 {
@@ -25,6 +22,12 @@ Route::group(array('before' => 'auth'), function()
 {
 	// Esta será nuestra ruta de bienvenida.
 	Route::get('/', 'HomeController@index');
+
+
+	Route::get('profile/edit/{id}', 'AuthController@edit');
+	Route::post('profile/update/{id}', 'AuthController@update');
+	Route::get('profile', 'AuthController@show');
+
 	
 	Route::get('publications', 'PublicationsController@index');
 	Route::post('select_state', 'PublicationsController@set_select_session');
@@ -55,6 +58,16 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('exchanges/show/{id}', 'ExchangesController@show');
 	Route::get('exchanges/complete/{id}' ,'ExchangesController@completeEx');
 
+	Route::get('galleries', 'GalleriesController@index');
+	Route::get('galleries/new', 'GalleriesController@create');
+	Route::post('galleries/store', 'GalleriesController@store');
+
+	Route::get('galleries/ajax/', function()
+	{
+		// dd($id);
+	  	$galleries = Gallery::all();
+		return Response::json($galleries);
+	});
 
 	// Esta ruta nos servirá para cerrar sesión.
 	Route::get('logout', 'AuthController@logOut');

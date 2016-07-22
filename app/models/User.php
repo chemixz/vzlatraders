@@ -52,7 +52,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 	'email'  => 'required|email|min:6|max:40',
 	 	'tlf'  => 'required|numeric|min:10',
 	 	'municipality_id' => 'required',
-	 	'photo'  => 'mimes:jpg,jpeg,png',
+	 	// 'photo'  => 'mimes:jpg,jpeg,png',
 
 	 ];
 

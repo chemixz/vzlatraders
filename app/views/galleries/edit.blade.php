@@ -1,0 +1,1 @@
+/var/www/html/vzlatraders/app/views/galleries/edit.blade.php

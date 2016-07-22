@@ -10,8 +10,6 @@ angular.module("angularFront",[])
 		
 		$("#state_select").change(function(event) {
 			var id = $(this).val();
-			
-			
 			if (id != '')
 			{
 				$('#select_municipalities').empty();
@@ -140,7 +138,6 @@ angular.module("angularFront",[])
 			
 		// })
 
-	// .controller("OpenImageController", function ($scope,$http,server){
 		$scope.openImage = function(id_proposal){
 			
 			imgSrc = $('#pro_image_'+id_proposal).attr('src');
@@ -150,8 +147,7 @@ angular.module("angularFront",[])
 			$('#modalImage').modal();
 			console.log(imgSrc);
 		}
-	// })
-	// .controller("Modal_Comment_Controller", function ($scope,$http,server){
+
 		$scope.editComment = function(id_comment)
 		{
 			$http.get('/comments/edit/'+id_comment)
@@ -175,7 +171,7 @@ angular.module("angularFront",[])
 			$('#form_comment').submit();
 		}
 		
-	// })
+	
 		img = new Image();
 		
 		$('#modalcomment').on('hidden.bs.modal', function () {
@@ -193,3 +189,37 @@ angular.module("angularFront",[])
 
 	})
 // End Calling Form Publication Show 
+
+	.controller("Profile_Controller", function ($scope,$http){
+			$("#state_select").change(function(event) {
+			var id = $(this).val();
+			if (id != '')
+			{
+				$('#select_municipalities').empty();
+				$http.get('/states/ajax/'+id)
+				.success(function (data){
+					// console.log(data)
+					$.each(data, function(i,e) {
+						
+						var option = new Option(e.name, e.id);
+						$('#select_municipalities').append($(option));
+					
+		    		});
+		    		// $('#selectsistema').selectpicker()
+				})
+				.error(function (err){
+
+				});
+				
+			}
+			else
+			{
+				$('#select_municipalities').empty();
+			};
+		});
+
+		$scope.openGalleries = function(){
+			alert("abriendo galeria");
+			$('#modalgallery').modal();
+		}
+	})
