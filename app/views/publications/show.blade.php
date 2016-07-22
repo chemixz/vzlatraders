@@ -87,20 +87,19 @@
               <a class="btn btn-danger" href="{{URL::to('/')}}/" data-toggle="tooltip" data-placement="top" title="Atras"><span class=" glyphicon glyphicon-arrow-left"></span></a>
              @if (Auth::user()->id == $publication->user->id)
               <a class="btn btn-success" href="{{URL::to('/')}}/publications/edit/{{$publication->id}}" data-toggle="tooltip" data-placement="top" title="Editar"><span class="glyphicon glyphicon-edit"></span></a>
-              <a class="btn btn-danger" href="{{URL::to('/')}}/publications/destroy/{{$publication->id}}" data-toggle="tooltip" data-placement="top" title="Borrar"><span class="glyphicon glyphicon-trash"></span></a>
-              
              @endif
          </div>
          @if ( count( $exchanges) > 0 )
          <div class="col-xs-12 text-center">
-           <h3>En Intercambio</h3>
+           <h3>En Intercambio  ({{count( Exchange::where(''))}})</h3>
          </div>
          <hr>
              <div class="col-md-12" style="margin-bottom: 5em; margin-top: 3em;">
                  <div class="col-md-5" >
                     <div class="col-md-12 " >
                         <a href="">
-                            <img width="100%" height="200" class="thumbnail" src="{{URL::to('/')}}/uploads/images/publications/user_{{$publication->user->id}}/{{$publication->picture}}" alt="">
+                        <?php $mivar = 'picture'.$publication->cover ?>
+                            <img width="100%" height="200" class="thumbnail" src="{{URL::to('/')}}/uploads/images/publications/user_{{$publication->user->id}}/{{$publication->$mivar}}" alt="">
                         </a>
                         <strong>Autor :</strong> {{$exchanges[0]->publication_autor_names}}
                     </div>
@@ -148,7 +147,7 @@
                             </a>
                         </div>
                         <div class="col-md-8 bootstrap_comment_box_parraph">
-                            <h4>{{$Pro->user->names}} Dijo:</h4> 
+                            <h4>{{$Pro->user->names}} Propone:</h4> 
                             <p>{{$Pro->description}}</p>
                            <div class="text-right  ">
                               <i >( {{date("d-m-Y H:i:s a", strtotime($Pro->created_at)); }})</i>
