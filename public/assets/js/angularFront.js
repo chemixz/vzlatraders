@@ -191,6 +191,7 @@ angular.module("angularFront",[])
 // End Calling Form Publication Show 
 
 	.controller("Profile_Controller", function ($scope,$http){
+
 			$("#state_select").change(function(event) {
 			var id = $(this).val();
 			if (id != '')
@@ -219,7 +220,21 @@ angular.module("angularFront",[])
 		});
 
 		$scope.openGalleries = function(){
-			alert("abriendo galeria");
+
+			$scope.gall_pictures = {};
+			
+			
+			$http.get('/galleries/ajax/')
+				.success(function (data){
+					 console.log(data)
+					$scope.gall_pictures = data;
+		    		
+				})
+				.error(function (err){
+
+			});
 			$('#modalgallery').modal();
+
+			
 		}
 	})

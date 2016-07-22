@@ -44,6 +44,7 @@ class GalleriesController extends \BaseController {
 		$filename = 'G_'.Str::random(13).'.'. $file->getClientOriginalExtension();
 		$mimeType = $file->getMimeType();
 		$extension = $file->getClientOriginalExtension();
+		File::makeDirectory($destinationPath, $mode = 0777, true, true);
 		$upload_success = $file->move($destinationPath,$filename);
 		$data['picture'] = $filename;
 		Gallery::create($data);

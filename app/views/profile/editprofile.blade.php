@@ -89,8 +89,11 @@
                       </div>
                       <div class="modal-body">
                      
-                      <div class="form-group"> 
-                         <img src="" alt="" width="100" height="100">
+                      <div class="" id="targe_gallery"> 
+                        <p ng-repeat=" picture in gall_pictures">
+                           <img src="{{URL::to('/')}}/uploads/images/galleries/@{{picture.picture}}" alt="" width="100" height="100">
+                        </p>
+                        
                       </div> 
                       <div class="text-center">
                         <button type="button"  class="btn btn-danger" data-dismiss="modal">Cancelar</button>
