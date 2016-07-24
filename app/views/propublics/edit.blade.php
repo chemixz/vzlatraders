@@ -1,0 +1,1 @@
+/home/chemixz/html/vzlatraders/app/views/propublics/edit.blade.php

@@ -2,6 +2,7 @@
 @section('content')
      <div class="row" ng-app="angularFront">
         <div class="col-xs-12 col-md-6 center-block no-float" ng-controller="Profile_Controller">
+            <h2 class="text-center">Editar Perfil</h2>
                 @if(Session::has('message'))  <!--muestra mesaje de suceso que viene del homecontrol-->
                 <div class="alert alert-{{ Session::get('class') }} fade in">
                     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">x</button>
@@ -23,17 +24,17 @@
                         <label for="photo"></label>
                         <div class="">
                           <div class="thumbnail" style="overflow:hidden;">
-                            <div id="targetprofile">
-                                <img width="100%" height="500" src="{{URL::to('/')}}/uploads/images/galleries/{{$user->photo}}" class="imythumb">
-                            </div>
+                           
+                                <img width="100%" height="500" id="targetprofile" src="{{URL::to('/')}}/uploads/images/galleries/{{$user->photo}}" class="imythumb">
+                    
                             <br>
                             <input type="button" name="buttonImg" ng-click="openGalleries()" value="Agregar Imagen" >    
+                           <div class="form-grou">
+                             <input type="hidden" id="picture_photo" name="photo" value="">
+                           </div>
                           </div>
                         </div>
                       </div>
-                   </div>
-                   <div class="form-grou">
-                     <input type="hidden" id="photo">
                    </div>
                     <div class="form-group">
                         {{ Form::label('credential','Cedula') }}
@@ -90,13 +91,14 @@
                       <div class="modal-body">
                      
                       <div class="" id="targe_gallery"> 
-                        <p ng-repeat=" picture in gall_pictures">
-                           <img src="{{URL::to('/')}}/uploads/images/galleries/@{{picture.picture}}" alt="" width="100" height="100">
-                        </p>
-                        
+                        @if (count($galleries)> 0 )
+                          @foreach ($galleries as $Pi)
+                           <img src="{{URL::to('/')}}/uploads/images/galleries/{{$Pi->picture}}"  width="100" height="100" class="thumbblack" id="avatar_{{$Pi->id}}" ng-click="setAvatar('{{$Pi->picture}}',{{$Pi->id}})" >
+                          @endforeach
+                        @endif
                       </div> 
-                      <div class="text-center">
-                        <button type="button"  class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                      <div class="text-center" style="margin-top: 1em;">
+                        <button type="button"  class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                       </div>
                  
                       </div>

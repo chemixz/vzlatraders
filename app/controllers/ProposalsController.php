@@ -9,9 +9,9 @@ class ProposalsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$proposals = Proposal::all();
+		$proposals = Proposal::where('user_id','=',Auth::user()->id )->get();
 
-		return View::make('proposals.index', compact('proposals'));
+		return View::make('userproposals.index', compact('proposals'));
 	}
 
 	/**
@@ -47,11 +47,21 @@ class ProposalsController extends \BaseController {
 			$file = Input::file('picture');		
 
 			$destinationPath = 'uploads/images/publications/user_'.$publication->user->id.'/proposals/';
-			// File::makeDirectory($destinationPath, $mode = 0777, true, true);
+			File::makeDirectory($destinationPath, $mode = 0777, true, true);
 			$filename = 'p_'.$publication_id.'_u_'.Auth::user()->id.'_'.Str::random(20).'.'. $file->getClientOriginalExtension();
 			$mimeType = $file->getMimeType();
 			$extension = $file->getClientOriginalExtension();
-			$upload_success = $file->move($destinationPath,$filename);
+			$width = Image::make( $file->getRealPath() )->width();
+			$height	= Image::make( $file->getRealPath() )->height();
+			if ($width <= 600 && $height <= 800) {
+				
+				Image::make( $file->getRealPath() )->save($destinationPath .$filename )->destroy();
+			}
+			else
+			{
+				Image::make( $file->getRealPath() )->resize(600,80)->save($destinationPath .$filename )->destroy();
+			}
+			// $upload_success = $file->move($destinationPath,$filename);
 
 			$data['picture'] = $filename;
 							
@@ -131,7 +141,18 @@ class ProposalsController extends \BaseController {
 				$filename = 'p_'.$proposal->publication->id.'_u_'.Auth::user()->id.'_'.Str::random(20).'.'. $file->getClientOriginalExtension();
 				$mimeType = $file->getMimeType();
 				$extension = $file->getClientOriginalExtension();
-				$upload_success = $file->move($destinationPath,$filename);
+				
+				$width = Image::make( $file->getRealPath() )->width();
+				$height	= Image::make( $file->getRealPath() )->height();
+				if ($width <= 600 && $height <= 800) {
+					
+					Image::make( $file->getRealPath() )->save($destinationPath .$filename )->destroy();
+				}
+				else
+				{
+					Image::make( $file->getRealPath() )->resize(600,800)->save($destinationPath .$filename )->destroy();
+				}
+				// $upload_success = $file->move($destinationPath,$filename);
 				File::delete($destinationPath.$proposal->picture);
 				$data['picture'] = $filename;
 								

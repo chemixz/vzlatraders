@@ -95,11 +95,11 @@
 				<div class="form-group">
 	                {{ Form::label('changeoptions','Cambio Por:') }}&nbsp;  Crea varias opciones una lista utilizando  Ejemplo:&nbsp;/  <br> 
 	                 <i> producto1 y proucto2 / producto3 / producto 1 producto 2 y producto 3 </i>
-					{{ Form::text('changeoptions',Input::old('changeoptions') ,['class'=>'form-control', 'placeholder'=>'Ingrese los productos'] ) }}	
+	                 <input type="text" name="changeoptions" placeholder="Ingrese los productos" class="form-control" value="{{Input::old('changeoptions')}}">
 				</div>
 				<div class="form-group">
 					<label for="">Cantidad</label>
-					<input type="number" min="0" name="stock" class="form-control">
+					<input type="number" min="0" name="stock" placeholder="Ingrese Cantidad" class="form-control" value="{{Input::old('stock')}}">
 				</div>
 		          <div class="form-group" >
 		          {{ Form::label('states','Estado') }}

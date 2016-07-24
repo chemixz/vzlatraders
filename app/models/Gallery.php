@@ -10,6 +10,7 @@ class Gallery extends \Eloquent {
 	public static $rules = [
 		'picture'  => 'mimes:jpg,jpeg,png',
 	 	'picture'  => 'required|unique:galleries,picture',
+	 	// 'picture'  => 'image|image_size:<=300'
 
 	];
 

@@ -2,7 +2,7 @@
 @section('content')
 		<div class="row">
 			<div class="col-xs-6 center-block no-float">
-
+			<h2 class="text-center">Mi Perfil</h2>
   			 <div class="text-center thumbnail">
                		<img width="100%" height="500" src="{{URL::to('/')}}/uploads/images/galleries/{{$user->photo}}">
         	 </div>

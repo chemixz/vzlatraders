@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration {
 	        $table->string('surnames',100);
 	        $table->string('email',100)->unique();
 	        $table->integer('tlf');
-	       	$table->string('photo',200)->default('default_image.jpg');
+	       	$table->string('photo',200)->default('default_image1.jpg');
 	        $table->string('password');
 			$table->enum('level', array(2,1))->default(1);
 	        $table->string('remember_token',100);

@@ -218,23 +218,29 @@ angular.module("angularFront",[])
 				$('#select_municipalities').empty();
 			};
 		});
-
 		$scope.openGalleries = function(){
-
-			$scope.gall_pictures = {};
-			
-			
-			$http.get('/galleries/ajax/')
-				.success(function (data){
-					 console.log(data)
-					$scope.gall_pictures = data;
+			// $scope.gall_pictures = {};
+			// $http.get('/galleries/ajax/')
+			// 	.success(function (data){
+			// 		 console.log(data)
+			// 		$scope.gall_pictures = data;
 		    		
-				})
-				.error(function (err){
+			// 	})
+			// 	.error(function (err){
 
-			});
+			// });
+
 			$('#modalgallery').modal();
-
-			
 		}
+
+		$scope.setAvatar = function(gallery_name ,gallery_id){
+			imgSrc = $('#avatar_'+gallery_id).attr('src');
+			console.log(imgSrc);
+			console.log(gallery_name);
+			$('#targetprofile').attr('src', imgSrc);
+			$('#picture_photo').val(gallery_name);
+			$('#modalgallery').modal('hide');
+
+		}
+
 	})

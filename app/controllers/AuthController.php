@@ -139,7 +139,7 @@ class AuthController extends BaseController {
 	public function update($id){
 
 		$user = User::findOrFail($id);
-
+		// dd(Input::all());
 		$validator = Validator::make($data = Input::all() , User::$rulesupdate , User::$messageregister);
 		if ($validator->fails())
 		{
@@ -170,15 +170,16 @@ class AuthController extends BaseController {
 		Session::flash('message','Actualizado Correctamente');
 		Session::flash('class','success');
 
-		return Redirect::to('/profile/'.$user->id);
+		return Redirect::to('/profile');
 	}
 	public function edit($id)
 	{	
 		$municipalities = Municipality::all();
 		$states = State::all();
+		$galleries = Gallery::all();
 		$user = User::find($id);
 
-		return View::make('profile.editprofile', compact('user','states','municipalities'));
+		return View::make('profile.editprofile', compact('user','states','municipalities','galleries'));
 	}
 
 	public function show()

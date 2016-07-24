@@ -31,6 +31,10 @@ class Proposal extends \Eloquent {
 	{
 	 	return $this->belongsTo('Publication');
 	}
+	public function propublic()
+	{
+	 	return $this->HasOne('Propublic');
+	}
 
 
 }

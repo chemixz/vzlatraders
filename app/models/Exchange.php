@@ -3,13 +3,12 @@
 class Exchange extends \Eloquent {
 
 	protected $table = 'exchanges';
-	protected $fillable =['proposal_picture','proposal_autor_names','user_id','publication_id'];
+	protected $fillable =['proposal_picture','user_id','publication_id'];
 	protected $guarded = ['id'];
 
 	 public static $rules = [
 
 	 	'proposal_picture' => 'required',
-	 	'proposal_autor_names' => 'required',
 	 	'user_id' => 'required',
 	 	'publication_id' => 'required',
 

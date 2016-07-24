@@ -33,7 +33,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::post('select_state', 'PublicationsController@set_select_session');
 	Route::post('select_cat', 'PublicationsController@set_select_cat');
 
-	Route::get('mypublications', 'PublicationsController@mypublications');
+	Route::get('userpublications', 'PublicationsController@userpublications');
 
 
 	Route::get('publications/new', 'PublicationsController@create');
@@ -41,7 +41,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('publications/show/{id}', 'PublicationsController@show');
 	Route::get('publications/edit/{id}', 'PublicationsController@edit');
 	Route::post('publications/update/{id}','PublicationsController@update');
-	// Route::get('publications/destroy/{id}', 'PublicationsController@destroy');
+	Route::get('publications/destroy/{id}', 'PublicationsController@destroy');
 
 	
 	Route::post('comments/store/{id}', 'CommentsController@store');
@@ -49,31 +49,38 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('comments/edit/{id}', 'CommentsController@edit');
 	Route::post('comments/update/{id}', 'CommentsController@update');
 	
+	Route::get('proposals', 'ProposalsController@index');
 	Route::post('proposals/store/{id}', 'ProposalsController@store');
-	Route::get('proposals/destroy/{id}', 'ProposalsController@destroy');
 	Route::get('proposals/edit/{id}', 'ProposalsController@edit');
 	Route::post('proposals/update/{id}', 'ProposalsController@update');
+	Route::get('proposals/destroy/{id}', 'ProposalsController@destroy');
+
+	Route::get('exchanges', 'ExchangesController@index');
 
 	Route::get('exchanges/new/{id}', 'ExchangesController@newEx');
 	Route::get('exchanges/show/{id}', 'ExchangesController@show');
 	Route::get('exchanges/complete/{id}' ,'ExchangesController@completeEx');
 
-	Route::get('galleries', 'GalleriesController@index');
-	Route::get('galleries/new', 'GalleriesController@create');
-	Route::post('galleries/store', 'GalleriesController@store');
+	Route::get('propublics/new/{id}', 'PropublicsController@newPropublic');
+	Route::get('propublics/complete/{publication_id}/{publication_stock}/{userID}', 'PropublicsController@complete');
 
 	Route::get('galleries/ajax/', function()
 	{
-		// dd($id);
 	  	$galleries = Gallery::all();
 		return Response::json($galleries);
 	});
 
-	// Esta ruta nos servirá para cerrar sesión.
+	
 	Route::get('logout', 'AuthController@logOut');
 
 	Route::group(array('before' => 'isAdmin'), function()
 	{	
+		Route::get('galleries/edit/{id}', 'GalleriesController@edit');
+		Route::post('galleries/update/{id}', 'GalleriesController@update');
+		Route::get('galleries/destroy/{id}', 'GalleriesController@destroy');
+		Route::get('galleries', 'GalleriesController@index');
+		Route::get('galleries/new', 'GalleriesController@create');
+		Route::post('galleries/store', 'GalleriesController@store');
 
 		Route::get('categories', 'CategoriesController@index');
 		Route::get('categories/new', 'CategoriesController@create');

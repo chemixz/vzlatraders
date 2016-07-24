@@ -48,11 +48,8 @@
           <div class="col-md-12 "  style="padding-left: 0; padding-right: 0; margin-top: 1em; ">
               <div class="col-xs-12 col-md-4 "  >
                   <a href=""  >
-                    @if ($publication->user->photo == "default_image.jpg")
-                          <img width="100%" height="180" src="{{URL::to('/')}}/uploads/images/profiles/{{$publication->user->photo}}" class="mythumb">
-                    @else
-                          <img width="100%" height="180" src="{{URL::to('/')}}/uploads/images/profiles/user_{{$publication->user->id}}/{{$user->photo}}" class="mythumb">
-                    @endif
+                     <img width="100%" height="180" src="{{URL::to('/')}}/uploads/images/galleries/{{$publication->user->photo}}" class="mythumb">
+                          
                   </a>
               </div>
               <div class="col-xs-12 col-md-8 ">
@@ -73,69 +70,103 @@
                     </ul>
                  <?php $options = explode("/", $publication->changeoptions); ?>
                   <strong>Por estas opciones:</strong>
-                  <ol>
+                  <ul>
                    @foreach ($options as $O)
                     <li style="color: blue"><strong>{{$O}}</strong></li>
                    @endforeach
-                   </ol>
-                 
+                   </ul>
+                  <p>
+                    <strong>Disponibles:</strong> <span style="color: blue; font-size: 1.5em;">{{$publication->stock}}</span>
+                  </p>
                  </div>
                  
               </div>
           </div>
           <div class="col-xs-12 text-center" style="margin-top: 1em;">
-              <a class="btn btn-danger" href="{{URL::to('/')}}/" data-toggle="tooltip" data-placement="top" title="Atras"><span class=" glyphicon glyphicon-arrow-left"></span></a>
+              <a class="btn btn-danger" href="{{URL::previous()}}" data-toggle="tooltip" data-placement="top" title="Atras"><span class=" glyphicon glyphicon-arrow-left"></span></a>
              @if (Auth::user()->id == $publication->user->id)
               <a class="btn btn-success" href="{{URL::to('/')}}/publications/edit/{{$publication->id}}" data-toggle="tooltip" data-placement="top" title="Editar"><span class="glyphicon glyphicon-edit"></span></a>
              @endif
          </div>
-         @if ( count( $exchanges) > 0 )
+         @if ( count( $propublics ) > 0 )
          <div class="col-xs-12 text-center">
-           <h3>En Intercambio  ({{count( Exchange::where(''))}})</h3>
+           <h3>En Intercambio  ({{ count($propublics) }})</h3>
          </div>
-         <hr>
-             <div class="col-md-12" style="margin-bottom: 5em; margin-top: 3em;">
-                 <div class="col-md-5" >
-                    <div class="col-md-12 " >
-                        <a href="">
-                        <?php $mivar = 'picture'.$publication->cover ?>
-                            <img width="100%" height="200" class="thumbnail" src="{{URL::to('/')}}/uploads/images/publications/user_{{$publication->user->id}}/{{$publication->$mivar}}" alt="">
-                        </a>
-                        <strong>Autor :</strong> {{$exchanges[0]->publication_autor_names}}
-                    </div>
-                    
-                    @if ($exchanges[0]->complete < 1 && $exchanges[0]->user_id == Auth::user()->id )
-                     <div class="col-xs-12">
-                      <a class="btn btn-success" href="{{URL::to('/')}}/exchanges/complete/{{$publication->id}}" data-toggle="tooltip" data-placement="top" title="Completar"><span class="glyphicon glyphicon-ok"></span></a>
-                    </div>
-                    @endif
-                    </div>
-                    <div class="col-md-2 text-center middle">
-                        <span class="glyphicon glyphicon-transfer" style="margin-top: 1.5em; font-size: 3em; color:blue;"></span>
-                    </div>
-                  <div class="col-md-5">
-                    <div class="col-md-12 ">
-                      <a href="">
-                           <img width="100%" height="200" class="thumbnail" src="{{URL::to('/')}}/uploads/images/publications/user_{{$publication->user->id}}/exchanges/{{$exchanges[1]->proposal_picture}}" alt="">
-                      </a>
-                      <strong>Autor :</strong> {{$exchanges[1]->proposal_autor_names}}
+         <div class="col-xs-12">
+          <hr >
+         </div>
+            <?php $cont = 0; ?>
 
+              @foreach ($propublics as $PP)
+                 @if ( $publication->user->id == Auth::user()->id || $PP->proposal->user->id == Auth::user()->id || Auth::user()->level > 1 )
+                   <?php  $cont = $cont + 1 ; ?>
+                  <div class="col-md-12" >
+                      <div class="col-xs-12 text-center">
+                        <strong>Intercambio Nro: {{$cont}}</strong>
+                      </div>
+                         <div class="col-md-5" >
+                            <div class="col-md-12 " >
+                                <a href="">
+                                <?php $mivar = 'picture'.$publication->cover ?>
+                                    <img width="100%" height="200" class="thumbnail" src="{{URL::to('/')}}/uploads/images/publications/user_{{$publication->user->id}}/{{$publication->$mivar}}" alt="">
+                                </a>
+                                <strong>Autor :</strong> {{$PP->publication->user->names}}
+                            </div>
+                            <div class="col-xs-12">
+                            @if ($PP->publisher_complete < 1 && $PP->publication->user->id == Auth::user()->id )
+                            
+                              <a class="btn btn-success" href="{{ URL::to('/propublics/complete', array($PP->id, 'S7z3',  Auth::user()->id )) }}" data-toggle="tooltip" data-placement="top" title="Completar"><span class="glyphicon glyphicon-ok"></span></a>
+                              <a class="btn btn-danger" href="" data-toggle="tooltip" data-placement="top" title="Cancelar"><span class="glyphicon glyphicon-ban-circle"></span></a>
+                              
+                          
+                            @endif
+                            @if ($PP->publisher_complete == 1 )
+                             
+                                <span class="glyphicon glyphicon-ok blue" data-toggle="tooltip" data-placement="top" title="Aceptado"></span>
+                             
+                            @else
+                            
+                               <span class="glyphicon glyphicon-time green" data-toggle="tooltip" data-placement="top" title="En espera"></span>
+                             
+                            @endif
+                           </div>
+                        </div>
+                        <div class="col-md-2 text-center middle">
+                              <span class="glyphicon glyphicon-transfer" style="margin-top: 1.5em; font-size: 3em; color:blue;"></span>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="col-md-12 ">
+                              <a href="">
+                                   <img width="100%" height="200" class="thumbnail" src="{{URL::to('/')}}/uploads/images/publications/user_{{$publication->user->id}}/proposals/{{$PP->proposal->picture}}" alt="">
+                              </a>
+                              <strong>Autor :</strong> {{$PP->proposal->user->names}}
+
+                            </div>
+                            <div class="col-xs-12">
+                              @if ($PP->proposal_complete < 1  && $PP->proposal->user->id == Auth::user()->id)
+                                <a class="btn btn-success" href="{{ URL::to('/propublics/complete', array($PP->id, '3Sx1' , Auth::user()->id )) }}" data-toggle="tooltip" data-placement="top" title="Completar"><span class="glyphicon glyphicon-ok"></span></a>
+                                <a class="btn btn-danger" href="" data-toggle="tooltip" data-placement="top" title="Cancelar"><span class="glyphicon glyphicon-ban-circle"></span></a>
+                              @endif
+                              @if ($PP->proposal_complete > 0  )
+                                  <span class="glyphicon glyphicon-ok blue" data-toggle="tooltip" data-placement="top" title="Aceptado"></span>
+                              @else
+                                 <span class="glyphicon glyphicon-time green" data-toggle="tooltip" data-placement="top" title="En espera"></span>
+                              @endif
+                            </div>   
+                       </div>
                     </div>
-                     
-                     @if ($exchanges[1]->complete < 1  && $exchanges[1]->user_id == Auth::user()->id)
-                    <div class="col-xs-12">
-                      <a class="btn btn-success" href="{{URL::to('/')}}/exchanges/complete/{{$publication->id}}" data-toggle="tooltip" data-placement="top" title="Completar"><span class="glyphicon glyphicon-ok"></span></a>
-                    </div>
-                    @endif
-                 </div>
-             </div>
+                  @endif
+               @endforeach
          @endif
         <br>
          <div class=" col-xs-12 text-center">
           <h3 >Propuestas ({{count($publication->proposals)}})</h3>
-        </div>
 
-        <hr>
+        </div>
+        <div class="col-xs-12">
+          <hr>
+        </div>
+       
         <div class="bootstrap_proposal_box" >
             @if (count($publication->proposals)>0)
                 @foreach ($publication->proposals as $Pro)
@@ -164,10 +195,10 @@
                         </div>
                         @endif
                     </div>
-                  @if ($publication->user->id == Auth::user()->id  && count( $exchanges) < $publication->stock )
+                  @if ($publication->user->id == Auth::user()->id  && count( $propublics) < $publication->stock )
                       
                        <div class="text-left bootstrap_cooment_box_actions"  >
-                          <a class="btn btn-success" href="{{URL::to('/')}}/exchanges/new/{{$Pro->id}}">Aceptar</a>
+                          <a class="btn btn-success" href="{{URL::to('/')}}/propublics/new/{{$Pro->id}}">Aceptar</a>
                           <a class="btn btn-danger" href="{{URL::to('/')}}/proposals/destroy/{{$Pro->id}}">Rechazar</a>
                       </div>
                   @endif
@@ -178,7 +209,7 @@
             @endif
          </div>
          <div >
-         @if ( count( $exchanges) < 1)
+      <!--    @if ( count( $propublics) < $publication->stock) -->
             @if ($publication->user->id != Auth::user()->id &&  count( Proposal::where('publication_id','=',$publication->id)->where('user_id','=',Auth::user()->id)->get() ) < 3 )
              <div class="text-left" >
                 <a class="btn btn-primary" href="" style="margin-top: 1em;" ng-click="newProposal({{$publication->id}})" data-toggle="modal" data-target="#modalproposal" >Nueva Propuesta </a>
@@ -190,12 +221,12 @@
               @endif
              </div>
             @endif
-        @elseif ($publication->user->id != Auth::user()->id )
+      <!-- @elseif ($publication->user->id != Auth::user()->id )
 
         <div class="text-left">
-          <p> Ya esta en progreso el intercambio </p>
+          <p> Ya esta en progreso el minimo de  intercambios </p>
         </div>
-        @endif
+        @endif -->
               <div class="modal fade" id="modalproposal" role="dialog" aria-labelledby="myModalLabel3"  >
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
@@ -249,12 +280,7 @@
               <div class="col-md-12 bootstrap_comment_box_content" >
                   <div class="col-md-3"">
                       <a href="">
-                           @if ($C->user->photo == "default_image.jpg")
-                          <img width="100%" height="150" src="{{URL::to('/')}}/uploads/images/profiles/{{$C->user->photo}}"  alt="">
-                          @else
-                          <img width="100%" height="150" src="{{URL::to('/')}}/uploads/images/profiles/{{$C->user->id}}/{{$C->user->photo}}"  alt="">
-
-                          @endif
+                          <img width="100%" height="150" src="{{URL::to('/')}}/uploads/images/galleries/{{$C->user->photo}}"  alt="">
                       </a>
                   </div>
                   <div class="col-md-9 bootstrap_comment_box_parraph">

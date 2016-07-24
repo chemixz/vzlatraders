@@ -33,10 +33,10 @@ class PublicationsController extends \BaseController {
         return Redirect::to('/publications');
 	}
 
-	public function mypublications()
+	public function userpublications()
 	{
 		$publications = Publication::where('user_id','=',Auth::user()->id )->get();
-		return View::make('mypublications.index', compact('publications'));
+		return View::make('userpublications.index', compact('publications'));
 
 	}
 
@@ -85,20 +85,24 @@ class PublicationsController extends \BaseController {
 			 {
 				$file = Input::file('picture'.$i);		
 
-				// File::makeDirectory($destinationPath, $mode = 0777, true, true);
+				File::makeDirectory($destinationPath, $mode = 0777, true, true);
 				$filename = 'pub_'.Auth::user()->id.'_'.Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
-				// if ( $data['radiocover'] == $i) 
-				// {
-				// 	$data['cover'] = $filename;
-				// }
+
 				$mimeType = $file->getMimeType();
 				$extension = $file->getClientOriginalExtension();
-				$upload_success = $file->move($destinationPath,$filename);
-				
-				// if($familia->picture!='package.png')
-				// {
-				// 	File::delete($destinationPath.$familia->picture);
-				// }
+
+				$width = Image::make( $file->getRealPath() )->width();
+				$height	= Image::make( $file->getRealPath() )->height();
+				if ($width <= 600 && $height <= 800) {
+					
+					Image::make( $file->getRealPath() )->save($destinationPath .$filename )->destroy();
+				}
+				else
+				{
+					Image::make( $file->getRealPath() )->resize(600,800)->save($destinationPath .$filename )->destroy();
+				}
+				// $upload_success = $file->move($destinationPath,$filename);
+
 				$data['picture'.$i] = $filename;
 								
 			}
@@ -111,7 +115,7 @@ class PublicationsController extends \BaseController {
 		Publication::create($data);
 		Session::flash('message','Publicacion creada correctamente');
 		Session::flash('class','success');
-		return Redirect::to('/mypublications');
+		return Redirect::to('/userpublications');
 
 	}
 
@@ -124,11 +128,12 @@ class PublicationsController extends \BaseController {
 	public function show($id)
 	{
 		$publication = Publication::findOrFail($id);
-		$exchanges = Exchange::where('publication_id', '=',$id )->get();
+		// $exchanges = Exchange::where('publication_id', '=',$id )->where('status','=','inprogress')->get();
+		$propublics = Propublic::where('publication_id','=',$id)->get();
 		// echo "<pre>";
-		// dd($exchange[0]);
+		// dd($propublics[0]->proposal->user->names);
 		// echo "</pre>";
-		return View::make('publications.show', compact('publication','exchanges'));
+		return View::make('publications.show', compact('publication','propublics'));
 	}
 
 	/**
@@ -171,7 +176,7 @@ class PublicationsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		// dd(Input::all());
+		
 		$publication = Publication::findOrFail($id);
 		
 		$validator = Validator::make($data = Input::all(), Publication::$rules);
@@ -180,37 +185,93 @@ class PublicationsController extends \BaseController {
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
+		
 		$destinationPath = 'uploads/images/publications/user_'.Auth::user()->id.'/';
-		for ($i=1; $i <= 3 ; $i++) { 
+		File::makeDirectory($destinationPath, $mode = 0777, true, true);
+		
+		if (Input::file('picture1'))
+		{
+			$file = Input::file('picture1');		
+			$filename = 'pub_'.Auth::user()->id.'_'.Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
+			$mimeType = $file->getMimeType();
+			$extension = $file->getClientOriginalExtension();
 			
-			if (Input::file('picture'.$i))
-			 {
-				$file = Input::file('picture'.$i);		
-
-				// File::makeDirectory($destinationPath, $mode = 0777, true, true);
-				$filename = 'pub_'.Auth::user()->id.'_'.Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
-				// if ( $data['radiocover'] == $i) 
-				// {
-				// 	$data['cover'] = $filename;
-				// }
-				$mimeType = $file->getMimeType();
-				$extension = $file->getClientOriginalExtension();
-				$upload_success = $file->move($destinationPath,$filename);
-				$mivar = 'picture'.$id;
-				File::delete($destinationPath.$publication->$mivar);
-	
-				$data['picture'.$i] = $filename;
-								
+			$width = Image::make( $file->getRealPath() )->width();
+			$height	= Image::make( $file->getRealPath() )->height();
+			if ($width <= 600 && $height <= 800) {
+				
+				Image::make( $file->getRealPath() )->save($destinationPath .$filename )->destroy();
 			}
 			else
 			{
-				unset($data['picture'.$i]);
+				Image::make( $file->getRealPath() )->resize(600,800)->save($destinationPath .$filename )->destroy();
 			}
+			// $upload_success = $file->move($destinationPath,$filename);
+			File::delete($destinationPath.$publication->picture1);
+			$data['picture1'] = $filename;
 		}
+		else
+		{
+			unset($data['picture1']);
+		}
+
+		if (Input::file('picture2'))
+		{
+			$file = Input::file('picture2');		
+			$filename = 'pub_'.Auth::user()->id.'_'.Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
+			$mimeType = $file->getMimeType();
+			$extension = $file->getClientOriginalExtension();
+
+			$width = Image::make( $file->getRealPath() )->width();
+			$height	= Image::make( $file->getRealPath() )->height();
+			if ($width <= 600 && $height <= 800) {
+				
+				Image::make( $file->getRealPath() )->save($destinationPath .$filename )->destroy();
+			}
+			else
+			{
+				Image::make( $file->getRealPath() )->resize(600,800)->save($destinationPath .$filename )->destroy();
+			}
+			
+			// $upload_success = $file->move($destinationPath,$filename);
+			File::delete($destinationPath.$publication->picture2);
+			$data['picture2'] = $filename;
+		}
+		else
+		{
+			unset($data['picture2']);
+		}
+
+		if (Input::file('picture3'))
+		{
+			$file = Input::file('picture3');		
+			$filename = 'pub_'.Auth::user()->id.'_'.Str::random(20).'_'.Auth::user()->id .'.'. $file->getClientOriginalExtension();
+			$mimeType = $file->getMimeType();
+			$extension = $file->getClientOriginalExtension();
+			
+			$width = Image::make( $file->getRealPath() )->width();
+			$height	= Image::make( $file->getRealPath() )->height();
+			if ($width <= 600 && $height <= 800) {
+				
+				Image::make( $file->getRealPath() )->save($destinationPath .$filename )->destroy();
+			}
+			else
+			{
+				Image::make( $file->getRealPath() )->resize(600,800)->save($destinationPath .$filename )->destroy();
+			}			
+			// $upload_success = $file->move($destinationPath,$filename);
+			File::delete($destinationPath.$publication->picture3);
+			$data['picture3'] = $filename;
+		}
+		else
+		{
+			unset($data['picture3']);
+		}
+		
 
 		$publication->update($data);
 
-		return Redirect::to('/mypublications');
+		return Redirect::to('/userpublications');
 
 
 
@@ -231,8 +292,12 @@ class PublicationsController extends \BaseController {
 
 		if( Authentications::Owner( $publication->user->id , Auth::user()->id ) )
 		{
+			$destinationPath = 'uploads/images/publications/user_'.$publication->user->id.'/';
+			File::delete($destinationPath.$publication->picture1);
+			File::delete($destinationPath.$publication->picture2);
+			File::delete($destinationPath.$publication->picture3);
 			Publication::destroy($id);
-			ession::flash('message','Publicacion borrada');
+			Session::flash('message','Publicacion borrada');
 			Session::flash('class','success');
 		
 		}
@@ -242,7 +307,7 @@ class PublicationsController extends \BaseController {
 			Session::flash('class','danger');
 			
 		}
-		return Redirect::back();
+		return Redirect::to('/userpublications');
 		// return Redirect::to('/');
 		
 		

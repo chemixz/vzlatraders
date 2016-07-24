@@ -42,6 +42,9 @@ hr{
 .mythumb{
   border: solid 3px white;
 }
+.thumbblack{
+  border: solid 3px gray;
+}
 .floating-bottom {
 
  bottom:12px;
@@ -99,7 +102,7 @@ hr{
 .public_box{
   margin-top: 2em;
   float:left;
-  margin-right: 2em;
+  margin-left: 2.2em;
 }
 .public_box_content{
  

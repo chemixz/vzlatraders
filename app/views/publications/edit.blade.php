@@ -31,7 +31,6 @@
 			            <div class="thumbnail" style="overflow:hidden;">
 			              <div id="target_create_1">
                 			<img width="100%" src="{{URL::to('/')}}/uploads/images/publications/user_{{$publication->user->id}}/{{$publication->picture1}}" class="img-responsive">
-                				
 			              </div>
 			              <br>
                             <input type="file" ng-model="picture1" name="picture1" onchange="angular.element(this).scope().onFileLoad(this,1)" id="file_picture1"     >
@@ -94,12 +93,12 @@
 
 			<div class="form-group">
                 {{ Form::label('description','Descripcion') }}
-				{{ Form::textarea('description',$publication->description ,['class'=>'form-control', 'placeholder'=>'Ingrese la marca del producto'] ) }}	
+	             <textarea name="description" id="" cols="" rows="4" class="form-control" placeholder="Ingrese descripcion">{{$publication->description}}</textarea>
 			</div>
 			<div class="form-group">
                 {{ Form::label('changeoptions','Cambio Por:') }}&nbsp; Ejemplo:&nbsp; Crea una lista utilizando /  <br> 
                 <i> producto1 y proucto2 / producto3 / producto 1 producto 2 y producto 3 </i>
-				<textarea name="changeoptions"  cols="30" rows="5" class="form-control">{{$publication->changeoptions}}</textarea>
+	            <input type="text" name="changeoptions" placeholder="Ingrese los productos" class="form-control" value="{{$publication->changeoptions}}">
 					
 			</div>
 			<div class="form-group">
@@ -135,7 +134,7 @@
 			<div class="col-xs-12 text-center">
 			{{ Form::hidden('user_id' ,Auth::user()->id ) }}
             {{ Form::submit('Guardar',['class'=>'btn btn-primary'] )}}
-			{{ HTML::link('/' , 'Atras',['class'=>'btn btn-danger'] ) }}
+           	 <a href="{{URL::previous()}}" class="btn btn-danger"> Atras</a>
 			</div>
 			
 			{{ Form::close() }}
