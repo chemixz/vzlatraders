@@ -23,17 +23,17 @@
             <div class="col-xs-12 col-md-3">
               <div  class="col-xs-4 col-sm-4 col-md-12" style="margin-top: 0.7em;" >
                <a href="">
-                  <img width="100%" ng-click="setCover(1)" id="cover_picture_1" height="90px" src="{{URL::to('/')}}/uploads/images/publications/user_{{$publication->user->id}}/{{$publication->picture1}}" class="img-responsive mythumb "  >
+                  <img width="100%" ng-click="setCover(1)" id="cover_picture_1" height="110" src="{{URL::to('/')}}/uploads/images/publications/user_{{$publication->user->id}}/{{$publication->picture1}}" class="mythumb "  >
                </a>
               </div>
               <div  class="col-xs-4 col-sm-4 col-md-12" style="margin-top: 0.7em;">
                 <a href="">
-                  <img width="100%" ng-click="setCover(2)" id="cover_picture_2" height="90px" src="{{URL::to('/')}}/uploads/images/publications/user_{{$publication->user->id}}/{{$publication->picture2}}" class="img-responsive mythumb "  >
+                  <img width="100%" ng-click="setCover(2)" id="cover_picture_2" height="110" src="{{URL::to('/')}}/uploads/images/publications/user_{{$publication->user->id}}/{{$publication->picture2}}" class="mythumb "  >
                 </a>
               </div>
               <div  class="col-xs-4 col-sm-4 col-md-12" style="margin-top: 0.7em;">
                 <a href="">
-                  <img width="100%" ng-click="setCover(3)" id="cover_picture_3" height="90px" src="{{URL::to('/')}}/uploads/images/publications/user_{{$publication->user->id}}/{{$publication->picture3}}" class="img-responsive mythumb "  >
+                  <img width="100%" ng-click="setCover(3)" id="cover_picture_3" height="110" src="{{URL::to('/')}}/uploads/images/publications/user_{{$publication->user->id}}/{{$publication->picture3}}" class="mythumb "  >
                 </a>
               </div>
             </div>
@@ -45,7 +45,7 @@
             </div>
          </div>
          
-          <div class="col-md-12 "  style="padding-left: 0; padding-right: 0; margin-top: 1em; ">
+          <div class="col-xs-12 "  style="padding-left: 0; padding-right: 0; margin-top: 1em; ">
               <div class="col-xs-12 col-md-4 "  >
                   <a href=""  >
                      <img width="100%" height="180" src="{{URL::to('/')}}/uploads/images/galleries/{{$publication->user->photo}}" class="mythumb">
