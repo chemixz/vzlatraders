@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.main')
 @section('content')
      <div class="row" ng-app="angularFront">
         <div class="col-xs-12 col-md-6 center-block no-float" ng-controller="Profile_Controller">

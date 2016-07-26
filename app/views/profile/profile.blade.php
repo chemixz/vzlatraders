@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.main')
 @section('content')
 		<div class="row">
 			<div class="col-xs-6 center-block no-float">

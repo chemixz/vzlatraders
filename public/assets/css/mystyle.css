@@ -6,6 +6,7 @@ hr{
  
   border-color: gray -moz-use-text-color -moz-use-text-color;
 }
+
 .animated
 {
   opacity: 1;
@@ -37,7 +38,7 @@ hr{
   margin-top: 5.1px;
 }
 .container-body{
-	margin-top: 1em;
+	margin-top: 5em;
 }
 .mythumb{
   border: solid 3px white;
